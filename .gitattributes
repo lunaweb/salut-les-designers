@@ -1,0 +1,9 @@
+*.eps -diff -crlf
+*.jpg -diff -crlf
+*.png -diff -crlf
+*.gif -diff -crlf
+*.mp4 -diff -crlf
+*.flv -diff -crlf
+*.swf -diff -crlf
+*.mov -diff -crlf
+*.mo -diff -crlf

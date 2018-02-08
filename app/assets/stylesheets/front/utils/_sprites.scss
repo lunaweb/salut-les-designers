@@ -1,0 +1,196 @@
+// Sprites data
+$sprite-maps: ();
+$sprite-maps-names: ();
+
+  $sprites: "sprites" "front/sprites.png" "front/sprites@2x.png" 40px 80px;
+  $sprites-sprites: ();
+  $sprites-sprites-names: ();
+
+    $sprites-sprites: append($sprites-sprites, "minus" -0px -0px 40px 40px);
+    $sprites-sprites-names: append($sprites-sprites-names, "minus");
+    $sprites-sprites: append($sprites-sprites, "plus" -0px -40px 40px 40px);
+    $sprites-sprites-names: append($sprites-sprites-names, "plus");
+
+  $sprites: append($sprites, $sprites-sprites);
+  $sprites: append($sprites, $sprites-sprites-names);
+
+  $sprite-maps: append($sprite-maps, $sprites);
+  $sprite-maps-names: append($sprite-maps-names, "sprites");
+
+
+// Options
+$sprite-dimensions: true !default; // Set sprite's dimensions by default?
+$sprite-background: true !default; // Set sprite's background by default?
+$sprite-map: nth($sprite-maps, 1) !default; // Default map?
+$sprite-rem: true !default; // Use rem?
+$sprite-rem-baseline: 10px !default; // Rem baseline?
+$sprite-rem-fallback: true !default; // Use pixel fallback for rem?
+$sprite-pixel-ratio: 1.5 !default; // Pixel ratio for HiDPI/Retina?
+$sprite-asset-pipeline: true !default; // Use asset pipeline?
+
+// Rem
+@function sprite-rem($values) {
+  $rem: ();
+  @each $value in $values {
+    @if type-of($value) == "number" and unit($value) == "px" {
+      $rem: append($rem, $value / ($sprite-rem-baseline / 1rem));
+    } @else {
+      $rem: append($rem, $value);
+    }
+  }
+  @return $rem;
+}
+
+@mixin sprite-rem($property, $values) {
+  @if $sprite-rem-fallback or not $sprite-rem {
+    #{$property}: $values;
+  }
+  @if $sprite-rem {
+    #{$property}: sprite-rem($values);
+  }
+}
+
+// List utilities
+@function sprite-map($map: $sprite-map) {
+  @if type-of($map) == "string" {
+    $index: index($sprite-maps-names, $map);
+    @if $index == false {
+      @warn "The map “#{$map}” does not exist.";
+    }
+    @return nth($sprite-maps, $index);
+  } @else {
+    @return $map;
+  }
+}
+
+@function sprite-map-name($map: $sprite-map) {
+  $map: sprite-map($map);
+  @return nth($map, 1);
+}
+
+@function sprite($sprite, $map: $sprite-map) {
+  $map: sprite-map($map);
+  $index: index(sprites-names($map), $sprite);
+  @if $index == false {
+    @warn "The sprite “#{$sprite}” does not exist in the map “#{sprite-map-name($map)}”.";
+  }
+  @return nth(sprites($map), $index);
+}
+
+@function sprite-name($sprite, $map: $sprite-map) {
+  $map: sprite-map($map);
+  $sprite: sprite($sprite, $map);
+  @return nth($map, 1);
+}
+
+@function sprites($map: $sprite-map) {
+  $map: sprite-map($map);
+  @return nth($map, 6);
+}
+
+@function sprites-names($map: $sprite-map) {
+  $map: sprite-map($map);
+  @return nth($map, 7);
+}
+
+// Background functions
+@function sprite-background-image($map: $sprite-map, $retina: false) {
+  $map: sprite-map($map);
+  @return if($retina, nth($map, 3), nth($map, 2));
+}
+
+@function sprite-background-width($map: $sprite-map) {
+  $map: sprite-map($map);
+  @return nth($map, 4);
+}
+
+@function sprite-background-height($map: $sprite-map) {
+  $map: sprite-map($map);
+  @return nth($map, 5);
+}
+
+@function sprite-background-size($map: $sprite-map) {
+  @return sprite-background-width($map) sprite-background-height($map);
+}
+
+// Sprite functions
+@function sprite-x($sprite, $map: $sprite-map) {
+  $sprite: sprite($sprite, $map);
+  @return nth($sprite, 2);
+}
+
+@function sprite-y($sprite, $map: $sprite-map) {
+  $sprite: sprite($sprite, $map);
+  @return nth($sprite, 3);
+}
+
+@function sprite-position($sprite, $map: $sprite-map) {
+  @return sprite-x($sprite, $map) sprite-y($sprite, $map);
+}
+
+@function sprite-width($sprite, $map: $sprite-map) {
+  $sprite: sprite($sprite, $map);
+  @return nth($sprite, 4);
+}
+
+@function sprite-height($sprite, $map: $sprite-map) {
+  $sprite: sprite($sprite, $map);
+  @return nth($sprite, 5);
+}
+
+// Background mixins
+@mixin sprite-background($map: $sprite-map, $background-repeat: no-repeat) {
+  @if $sprite-asset-pipeline {
+    background-image: image-url(sprite-background-image($map));
+  } @else {
+    background-image: url(sprite-background-image($map));
+  }
+  @if $background-repeat {
+    background-repeat: $background-repeat;
+  }
+  @include sprite-rem(background-size, sprite-background-size($map));
+  @media (-webkit-min-device-pixel-ratio: #{$sprite-pixel-ratio}), (min-resolution: #{$sprite-pixel-ratio*96}dpi) {
+    @if $sprite-asset-pipeline {
+      background-image: image-url(sprite-background-image($map, true));
+    } @else {
+      background-image: url(sprite-background-image($map, true));
+    }
+  }
+}
+
+// Sprite mixins
+@mixin sprite-position($sprite, $map: $sprite-map) {
+  @include sprite-rem(background-position, sprite-position($sprite, $map));
+}
+
+@mixin sprite-dimensions($sprite, $map: $sprite-map) {
+  @include sprite-rem(width, sprite-width($sprite, $map));
+  @include sprite-rem(height, sprite-height($sprite, $map));
+}
+
+@mixin sprite($sprite, $map: $sprite-map, $dimensions: $sprite-dimensions, $background: $sprite-background) {
+  @if $background {
+    @include sprite-background($map);
+  }
+  @include sprite-position($sprite, $map);
+  @if $dimensions {
+    @include sprite-dimensions($sprite, $map);
+  }
+}
+
+@mixin sprites($sprites: sprites-names($sprite-map), $map: $sprite-map, $dimensions: $sprite-dimensions, $prefix: true) {
+  $name: sprite-map-name($map);
+  @if type-of($prefix) == "string" {
+    $name: $prefix;
+  }
+  [class^="#{$name}-"],
+  [class*=" #{$name}-"] {
+    @include sprite-background($map);
+  }
+  @each $sprite in $sprites {
+    $selector: if($prefix, "#{$name}-#{$sprite}", $sprite);
+    .#{$selector} {
+      @include sprite($sprite, $map, $dimensions, $background: false);
+    }
+  }
+}

@@ -1,0 +1,68 @@
+// Colors (https://flatuicolors.com)
+$color-turquoise: #1abc9c;
+$color-green-sea: #16a085;
+$color-emerald: #2ecc71;
+$color-nephritis: #27ae60;
+$color-peter-river: #3498db;
+$color-belize-hole: #2980b9;
+$color-amethyst: #9b59b6;
+$color-wisteria: #8e44ad;
+$color-wet-asphalt: #34495e;
+$color-midnight-blue: #2c3e50;
+$color-sun-flower: #f1c40f;
+$color-orange: #f39c12;
+$color-carrot: #e67e22;
+$color-pumpkin: #d35400;
+$color-alizarin: #e74c3c;
+$color-pomegranate: #c0392b;
+$color-clouds: #ecf0f1;
+$color-silver: #bdc3c7;
+$color-concrete: #95a5a6;
+$color-asbestos: #7f8c8d;
+
+$color-background: #fff;
+$color-foreground: #000;
+
+$color-primary: $color-belize-hole;
+$color-secondary: $color-wet-asphalt;
+
+$color-success: $color-nephritis;
+$color-error: $color-pomegranate;
+
+// Fonts
+$font-default: "Helvetica Neue", Arial, sans-serif;
+$font-primary: $font-default;
+$font-serif: Georgia, Times, "Times New Roman", serif;
+$font-code: Inconsolata, Monaco, Consolas, "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+
+// Font-size + line-height
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+// Z-indexes
+$z-header: 2;
+$z-main: 1;
+
+// Dimensions
+$gutter-size: 20px;
+$container-width: 940px;
+
+// Breakpoints
+$mq-breakpoints:
+  "small" 480px,
+  "medium" 720px,
+  "large" 960px;
+
+// Rem
+$rem-fallback: true;
+$rem-baseline: 10px;
+
+// Resolution
+$resolution-default: 2;
+
+// Sprites
+$sprite-pixel-ratio: $resolution-default;
+$sprite-asset-pipeline: true;
+$sprite-rem: true;
+$sprite-rem-fallback: $rem-fallback;
+$sprite-rem-baseline: $rem-fallback;

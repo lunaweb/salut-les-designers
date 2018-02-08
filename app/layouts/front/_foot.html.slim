@@ -1,0 +1,5 @@
+= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
+javascript:
+  window.jQuery || document.write('<script src="#{asset_path(:js, "jquery/jquery.js")}"><\/script>')
+= javascript_include_tag :front
+= content_for :page_scripts

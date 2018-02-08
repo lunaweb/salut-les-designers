@@ -1,0 +1,27 @@
+{
+  "name": "luna-frontend",
+  "version": "1.0.0",
+  "description": "Luna Front-end",
+  "repository": {
+    "type": "git",
+    "url": "git@codebasehq.com:lunaweb/starter-kits/middleman.git"
+  },
+  "author": "LunaWeb",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-zip": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-svgmin": "^1.2.2",
+    "gulp-svgstore": "^6.1.0",
+    "moment": "^2.17.1"
+  },
+  "dependencies": {
+    "sass-em": "^1.0.2",
+    "sass-mq": "^3.2.9",
+    "sass-rem": "^1.2.2",
+    "sass-resolution": "^1.0.0",
+    "svg4everybody": "^2.1.4"
+  }
+}

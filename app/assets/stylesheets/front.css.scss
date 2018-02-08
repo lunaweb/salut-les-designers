@@ -1,0 +1,23 @@
+// Settings
+@import "front/settings";
+
+// Bower utilities
+@import "sass-mq/mq",
+        "sass-em/em",
+        "sass-rem/rem",
+        "sass-resolution/resolution";
+
+// Utilities
+@import "front/utils/mixins",
+        "front/utils/functions";
+
+// Core
+@import "front/core/reset",
+        "front/core/fonts",
+        "front/core/base";
+
+// Layout
+@import "front/layout/base";
+
+// Modules
+@import "front/components/component-name";

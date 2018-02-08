@@ -1,0 +1,38 @@
+$image-data: (
+  ("front/sprites.png" 40px 80px)
+  ("front/sprites/minus.png" 40px 40px)
+  ("front/sprites/minus@2x.png" 80px 80px)
+  ("front/sprites/plus.png" 40px 40px)
+  ("front/sprites/plus@2x.png" 80px 80px)
+  ("front/sprites@2x.png" 80px 160px)
+  ("front/lunaweb.png" 140px 140px)
+  ("front/svg/lunaweb.png" 140px 140px)
+  ("front/lunaweb@2x.png" 280px 280px)
+);
+
+@function image-data($path) {
+  @if type-of($path) == "string" {
+    @each $data in $image-data {
+      @if nth($data, 1) == $path {
+        @return $data;
+      }
+    }
+    @warn "The image “#{$path}” does not exist.";
+    @return false;
+  } @else {
+    @return $path;
+  }
+}
+
+@function image-width($path) {
+  @return nth(image-data($path), 2);
+}
+
+@function image-height($path) {
+  @return nth(image-data($path), 3);
+}
+
+@function image-size($path) {
+  $image: image-data($path);
+  @return image-width($image) image-height($image);
+}

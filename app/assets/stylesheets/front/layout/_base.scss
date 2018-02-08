@@ -1,0 +1,6 @@
+.container {
+  @include rem(max-width, $container-width + $gutter-size);
+  margin: 0 auto;
+  @include rem(padding, 0 ($gutter-size / 2));
+  position: relative;
+}
