@@ -55,7 +55,10 @@ sprockets.append_path File.join(root, "node_modules")
 ###
 
 # Slim
-set :slim, { :pretty => false }
+set :slim, { :pretty => true }
+
+# Dato
+activate :dato
 
 ###
 # Environnement-specific confirgurations

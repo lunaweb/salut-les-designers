@@ -1,16 +1,18 @@
-section.hero
-  img.hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les deigners !")
+- audio = dato.audios.first()
 
-  a.hero__echo.c-echo (href="#")
+section.hero
+  img.hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les designers !")
+
+  a.hero__echo.c-echo (href=audio.url target="_blank")
     .c-echo__picture
-      img.c-echo__portrait (src="/medias/cynthia-savard-saucier-echo.jpg" alt="Cynthia Savard-Saucier")
+      img.c-echo__portrait (src=audio.portrait.url(w: 56, h: 56) alt=audio.title)
       .c-echo__bars
         - for i in 1..10
           .c-echo__bar
     span.c-echo__label Dernier épisode
     p.c-echo__author
-      strong.c-echo__name Cynthia Savard-Saucier
-      span.c-echo__job Directrice design @shopify
+      strong.c-echo__name = audio.title
+      span.c-echo__job = audio.subtitle
 
 section (style="height: 300vh; background: teal;")
 

@@ -7,6 +7,7 @@ gem 'middleman-livereload'
 gem 'middleman-autoprefixer'
 gem 'middleman-deploy', github: 'middleman-contrib/middleman-deploy', branch: 'master'
 gem 'middleman-sprockets'
+gem "middleman-dato"
 gem 'slim'
 
 gem 'foreman', require: false
