@@ -20,20 +20,28 @@ $color-silver: #bdc3c7;
 $color-concrete: #95a5a6;
 $color-asbestos: #7f8c8d;
 
-$color-background: #fff;
+$color-red: #FF001E;
+$color-salmon: #FFD2D2;
+
+$color-background: $color-salmon;
 $color-foreground: #000;
 
-$color-primary: $color-belize-hole;
+$color-primary: $color-red;
 $color-secondary: $color-wet-asphalt;
 
 $color-success: $color-nephritis;
 $color-error: $color-pomegranate;
 
 // Fonts
-$font-default: "Helvetica Neue", Arial, sans-serif;
+$font-default: Karmilla, sans-serif;
 $font-primary: $font-default;
+$font-secondary: Ace, sans-serif;
 $font-serif: Georgia, Times, "Times New Roman", serif;
 $font-code: Inconsolata, Monaco, Consolas, "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+
+// Font weights
+$font-regular: 400;
+$font-bold: 600;
 
 // Font-size + line-height
 $base-font-size: 16px;
@@ -48,13 +56,14 @@ $gutter-size: 20px;
 $container-width: 940px;
 
 // Breakpoints
-$mq-breakpoints:
-  "small" 480px,
-  "medium" 720px,
-  "large" 960px;
+$mq-breakpoints: (
+  small: 480px,
+  medium: 720px,
+  large: 960px
+);
 
 // Rem
-$rem-fallback: true;
+$rem-fallback: false;
 $rem-baseline: 10px;
 
 // Resolution

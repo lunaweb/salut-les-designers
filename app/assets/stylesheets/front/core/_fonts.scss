@@ -1,1 +1,5 @@
-// @include font-face("Webfont", "webfont");
+@include font-face("Ace", "front/ace_lift", $font-regular, normal);
+@include font-face("Ace", "front/ace_lift_bold", $font-bold, normal);
+
+@include font-face("Karmilla", "front/karmilla-regular", $font-regular, normal);
+@include font-face("Karmilla", "front/karmilla-bold", $font-bold, normal);

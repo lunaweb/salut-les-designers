@@ -1,3 +1,16 @@
-= ui_component("component-name",
-  content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit facere quae quibusdam animi unde voluptatum esse libero voluptatem, molestiae reiciendis dolorum quod illo, facilis minima modi ullam tempora nobis, nulla.",
-)
+section.hero
+  img.hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les deigners !")
+
+  a.hero__echo.c-echo (href="#")
+    .c-echo__picture
+      img.c-echo__portrait (src="/medias/cynthia-savard-saucier-echo.jpg" alt="Cynthia Savard-Saucier")
+      .c-echo__bars
+        - for i in 1..10
+          .c-echo__bar
+    span.c-echo__label Dernier épisode
+    p.c-echo__author
+      strong.c-echo__name Cynthia Savard-Saucier
+      span.c-echo__job Directrice design @shopify
+
+section (style="height: 300vh; background: teal;")
+

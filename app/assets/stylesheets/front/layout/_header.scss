@@ -1,0 +1,23 @@
+.header {
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+  .header__logo {
+    backface-visibility: hidden;
+    display: inline-block;
+    opacity: 0;
+    margin: rem(10px);
+    visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s, transform 100ms linear;
+
+    &.is-display,
+    .no-js & {
+      opacity: 1;
+      visibility: visible;
+    }
+  }

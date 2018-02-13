@@ -1,0 +1,47 @@
+.footer {
+  backface-visibility: hidden;
+  bottom: rem(30px);
+  left: rem(20px);
+  position: fixed;
+  right: rem(20px);
+}
+
+  .footer__link {
+    font-weight: $font-bold;
+    text-decoration: underline;
+  }
+
+  .footer__label,
+  .footer__list,
+  .footer__item {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .footer__label {
+    @include mq($until: medium) {
+      display: none;
+    }
+  }
+
+  .footer__list {
+    list-style: none;
+
+    @include mq($until: medium) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+    .footer__item {
+      @include mq($from: medium) {
+        margin-left: rem(50px);
+
+        &--contact {
+          margin-left: 0;
+          bottom: 0;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }

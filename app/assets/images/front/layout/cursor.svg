@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>curseur</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="SLD---Episodes-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1143.000000, -361.000000)">
+        <g id="Navigation" transform="translate(15.000000, 10.000000)" fill="#FF001E">
+            <circle id="curseur" cx="1138" cy="361" r="10"></circle>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,45 @@
+.hero {
+  backface-visibility: hidden;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  // perspective: 1000;
+}
+
+  .hero__logo {
+    // font-size: 100vh;
+    // height: 1em; // 124px
+    // width: 1.532em; // 190px
+    font-size: 110vw;
+    height: 0.652em;
+    width: 1em;
+    max-width: none;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    perspective: 1000;
+  }
+
+    .hero__echo {
+      // // bottom: rem(140px);
+      // bottom: rem(75px);
+      // margin-left: rem(-310px / 2);
+      position: absolute;
+      left: 50%;
+      // width: rem(310px);
+
+      @include mq($until: medium) {
+        bottom: rem(75px);
+        margin-left: rem(-300px / 2);
+        width: rem(300px);
+      }
+
+      @include mq($from: medium) {
+        bottom: rem(140px);
+        margin-left: rem(-310px / 2);
+        width: rem(310px);
+      }
+    }

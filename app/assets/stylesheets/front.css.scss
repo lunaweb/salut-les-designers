@@ -17,7 +17,11 @@
         "front/core/base";
 
 // Layout
-@import "front/layout/base";
+@import "front/layout/base",
+        "front/layout/header",
+        "front/layout/nav",
+        "front/layout/footer";
 
 // Modules
-@import "front/components/component-name";
+@import "front/components/echo";
+@import "front/components/hero";
