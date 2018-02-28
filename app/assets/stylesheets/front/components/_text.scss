@@ -1,0 +1,29 @@
+.c-text {
+  font-size: rem(30px);
+  line-height: (36 / 30);
+  text-align: center;
+
+  &--big {
+    font-family: $font-secondary;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  * + * {
+    margin-top: 1em;
+  }
+}
+
+
+@include mq($from: large) {
+
+  .c-text {
+    &--big {
+      font-size: rem(60px);
+      line-height: (70 / 60);
+    }
+  }
+
+}

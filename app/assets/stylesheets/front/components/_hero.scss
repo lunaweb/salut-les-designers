@@ -3,7 +3,7 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  // perspective: 1000;
+  perspective: 5vw;
 }
 
   .hero__logo {
@@ -24,22 +24,11 @@
   }
 
     .hero__echo {
-      // // bottom: rem(140px);
-      // bottom: rem(75px);
-      // margin-left: rem(-310px / 2);
-      position: absolute;
-      left: 50%;
-      // width: rem(310px);
-
       @include mq($until: medium) {
         bottom: rem(75px);
-        margin-left: rem(-300px / 2);
-        width: rem(300px);
       }
 
       @include mq($from: medium) {
         bottom: rem(140px);
-        margin-left: rem(-310px / 2);
-        width: rem(310px);
       }
     }

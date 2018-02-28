@@ -4,9 +4,10 @@ $echo-portrait-size: em(60px, $base-font-size);
   backface-visibility: hidden;
   background: #fff;
   border-radius: em(100px, $base-font-size);
-  display: block;
+  display: flex;
+  align-items: center;
   line-height: (20 / 16);
-  padding: em(15px 20px 15px 85px, $base-font-size);
+  padding: em(15px, $base-font-size);
   position: relative;
   transition: transform 0.25s;
 
@@ -16,12 +17,18 @@ $echo-portrait-size: em(60px, $base-font-size);
   }
 }
 
+  .c-echo__picture,
+  .c-echo__description {
+    // flex: 0 1 auto;
+  }
+
   .c-echo__picture {
-    position: absolute;
+    flex: 0 0 auto;
+    position: relative;
     height: $echo-portrait-size;
-    left: em(15px, $base-font-size);
-    margin-top: (-$echo-portrait-size / 2);
-    top: 50%;
+    // left: em(15px, $base-font-size);
+    // margin-top: (-$echo-portrait-size / 2);
+    // top: 50%;
     width: $echo-portrait-size;
   }
 
@@ -52,7 +59,7 @@ $echo-portrait-size: em(60px, $base-font-size);
         animation-iteration-count: infinite;
 
         .c-echo:hover &, .c-echo:focus & {
-          animation-name: bars;
+          animation-name: echo-bars;
         }
 
         &:nth-child(1),
@@ -67,25 +74,29 @@ $echo-portrait-size: em(60px, $base-font-size);
         &:nth-child(5) { height: 87.5%; animation-delay: 0.75s; }
       }
 
-  .c-echo__label {
-    color: $color-primary;
-    font-size: em(14px, $base-font-size);
-    font-weight: $font-bold;
+  .c-echo__description {
+    padding: em(0 10px, $base-font-size);
   }
 
-  .c-echo__author {
-  }
-
-    .c-echo__name {
-      display: block;
+    .c-echo__label {
+      color: $color-primary;
+      font-size: em(14px, $base-font-size);
+      font-weight: $font-bold;
     }
 
-    .c-echo__job {
-      font-size: em(12px, $base-font-size);
+    .c-echo__author {
     }
+
+      .c-echo__name {
+        display: block;
+      }
+
+      .c-echo__job {
+        font-size: em(12px, $base-font-size);
+      }
 
 // https://codepen.io/JohnCoxsey/pen/qRROp
-@keyframes bars {
+@keyframes echo-bars {
   9% { height: 85.71%; }
   18% { height: 78.57%; }
   27% { height: 71.42%; }
@@ -97,4 +108,41 @@ $echo-portrait-size: em(60px, $base-font-size);
   81% { height: 28.57%; }
   90% { height: 100%; }
   100% { height: 85.71%; }
+}
+
+// Floating echo
+.c-echo--floating {
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  animation: echo-fade-in 0.5s;
+
+  &:hover, &:focus {
+    transform: translateX(-50%) translateY(-1rem);
+  }
+
+  .c-echo__description {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 20rem;
+    animation: echo-slide-in 1s;
+  }
+}
+
+@keyframes echo-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 2rem);
+  }
+}
+
+@keyframes echo-slide-in {
+  0% {
+    padding: 0;
+    width: 0;
+  }
+  50% {
+    padding: 0;
+    width: 0;
+  }
 }

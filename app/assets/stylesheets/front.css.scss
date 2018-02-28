@@ -20,8 +20,10 @@
 @import "front/layout/base",
         "front/layout/header",
         "front/layout/nav",
-        "front/layout/footer";
+        "front/layout/footer",
+        "front/layout/section";
 
 // Modules
-@import "front/components/echo";
-@import "front/components/hero";
+@import "front/components/echo",
+        "front/components/hero",
+        "front/components/text";

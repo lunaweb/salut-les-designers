@@ -1,0 +1,14 @@
+.l-section {
+  &--concept {
+    background: $color-purple;
+    color: $color-salmon;
+  }
+
+  @include mq($until: large) {
+    padding: rem(124px) 0;
+  }
+
+  @include mq($from: large) {
+    padding: rem(140px) 0;
+  }
+}
