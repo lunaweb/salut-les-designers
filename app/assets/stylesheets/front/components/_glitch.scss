@@ -1,0 +1,38 @@
+/**
+ * Inspired from https://codepen.io/ayamflow/pen/DCifh?q=glitch&order=popularity&depth=everything&show_forks=false
+ */
+
+.glitch {
+
+}
+
+.glitch--link {
+  display: inline-block;
+
+  &:hover, &:focus {
+    animation: glitch-text 0.25s infinite;
+  }
+}
+
+$glitch-colors: $color-red, $color-salmon, $color-purple;
+
+@keyframes glitch-text {
+  @for $i from 0 through 50 {
+    #{2% * $i} {
+      $color: nth($glitch-colors, random(length($glitch-colors)));
+      text-shadow: ((random(200) - 100) / 100) * 1em  ((random(30) - 15) / 100) * 1em 0 $color;
+      transform: translateX(((random(25) - 12.5) / 100) * 1em);
+    }
+  }
+}
+
+@media only screen and (prefers-reduced-motion: reduce) {
+
+  .glitch--link {
+    &:hover, &:focus {
+      color: $color-red;
+      animation: none;
+    }
+  }
+
+}

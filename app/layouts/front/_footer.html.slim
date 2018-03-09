@@ -4,15 +4,15 @@ span.footer__label S'abonner :
 ul.footer__list
   - if(dato.config.soundcloud_url)
     li.footer__item
-      a.footer__link (href=dato.config.soundcloud_url target="_blank") Soundcloud
+      a.footer__link.glitch.glitch--link (href=dato.config.soundcloud_url target="_blank") Soundcloud
   - if(dato.config.itunes_url)
     li.footer__item
-      a.footer__link (href=dato.config.itunes_url target="_blank") iTunes
+      a.footer__link.glitch.glitch--link (href=dato.config.itunes_url target="_blank") iTunes
   - if(dato.config.rss_url)
     li.footer__item
-      a.footer__link (href=dato.config.rss_url target="_blank") RSS
+      a.footer__link.glitch.glitch--link (href=dato.config.rss_url target="_blank") RSS
   - if(dato.config.contact_email)
     li.footer__item.footer__item--contact
-      a.footer__link (href="mailto:#{dato.config.contact_email}") Contact
+      a.footer__link.glitch.glitch--link (href="mailto:#{dato.config.contact_email}") Contact
 
 
