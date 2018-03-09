@@ -16,10 +16,11 @@
       var ticking = false;
 
       var spyTopBottom = function spyTopBottom() {
+        var offset = 20;
         var top = $(window).scrollTop();
-        var bottom = $(document).height();
+        var bottom = top + window.innerHeight;
 
-        if(top === 0 || bottom === top + $(window).height()){
+        if(top <= offset || bottom >= $(document).height() - offset){
           $footer.removeClass('is-hide');
         } else {
           $footer.addClass('is-hide');
