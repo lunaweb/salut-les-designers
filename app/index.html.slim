@@ -3,7 +3,7 @@
 section.hero
   img.hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les designers !")
 
-  a.hero__echo.c-echo.c-echo--floating (href=audio.url target="_blank")
+  a.hero__echo.c-echo.c-echo--floating (href=audio.url target="_blank" data-teaser="#{audio.teaser_sound.url()}")
     .c-echo__picture
       img.c-echo__portrait (src=audio.portrait.url(w: 56, h: 56) alt=audio.title)
       .c-echo__bars

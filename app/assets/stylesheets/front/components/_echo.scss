@@ -95,6 +95,10 @@ $echo-portrait-size: em(60px, $base-font-size);
         font-size: em(12px, $base-font-size);
       }
 
+  .c-echo__audio {
+    display: none;
+  }
+
 // https://codepen.io/JohnCoxsey/pen/qRROp
 @keyframes echo-bars {
   9% { height: 85.71%; }

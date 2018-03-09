@@ -5,6 +5,7 @@
 //= require front/_footer.js
 // require front/_hero.js
 //= require front/_hero-rotate3d.js
+//= require front/_echo.js
 
 // var $win = $(window),
 //     $doc = $(document),
