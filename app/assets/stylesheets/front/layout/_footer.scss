@@ -5,6 +5,7 @@
   position: fixed;
   right: rem(20px);
   transition: opacity 0.25s, visibility 0.25s;
+  animation: footer-fade-in 1s;
 
   &.is-hide {
     opacity: 0;
@@ -51,3 +52,10 @@
         }
       }
     }
+
+@keyframes footer-fade-in {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

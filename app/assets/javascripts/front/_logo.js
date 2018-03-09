@@ -45,7 +45,7 @@
       window.requestAnimationFrame(updateLogoPosition);
 
       // Hero section exclusion
-      var $hero = $('.hero');
+      var $hero = $('.c-hero');
 
       if($hero.length){
         var ticking = false;

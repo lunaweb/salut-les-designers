@@ -119,7 +119,7 @@ $echo-portrait-size: em(60px, $base-font-size);
   left: 50%;
   position: absolute;
   transform: translateX(-50%);
-  animation: echo-fade-in 0.5s;
+  // animation: echo-fade-in 0.5s;
 
   &:hover, &:focus {
     transform: translateX(-50%) translateY(-1rem);
@@ -129,7 +129,15 @@ $echo-portrait-size: em(60px, $base-font-size);
     overflow: hidden;
     white-space: nowrap;
     width: 20rem;
-    animation: echo-slide-in 1s;
+    // animation: echo-slide-in 1s;
+  }
+
+  &.is-animate {
+    animation: echo-fade-in 0.5s;
+
+    .c-echo__description {
+      animation: echo-slide-in 1s;
+    }
   }
 }
 
@@ -141,11 +149,7 @@ $echo-portrait-size: em(60px, $base-font-size);
 }
 
 @keyframes echo-slide-in {
-  0% {
-    padding: 0;
-    width: 0;
-  }
-  50% {
+  0%, 50% {
     padding: 0;
     width: 0;
   }

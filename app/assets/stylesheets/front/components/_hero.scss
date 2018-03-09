@@ -1,4 +1,4 @@
-.hero {
+.c-hero {
   backface-visibility: hidden;
   height: 100vh;
   overflow: hidden;
@@ -6,7 +6,7 @@
   perspective: 5vw;
 }
 
-  .hero__logo {
+  .c-hero__logo {
     // font-size: 100vh;
     // height: 1em; // 124px
     // width: 1.532em; // 190px
@@ -21,9 +21,13 @@
     transform: translate(-50%, -50%);
     transform-origin: 50% 50%;
     perspective: 1000;
+
+    &.is-animate {
+      animation: zoom-in 1.5s;
+    }
   }
 
-    .hero__echo {
+    .c-hero__echo {
       @include mq($until: medium) {
         bottom: rem(75px);
       }
@@ -32,3 +36,14 @@
         bottom: rem(140px);
       }
     }
+
+@keyframes zoom-in {
+  0% { transform: translate(-50%, -50%) scale(0); animation-timing-function: ease-in; }
+  33% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
+  50% { transform: translate(-50%, -50%) scale(0.6); animation-timing-function: ease-in; }
+  66% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
+  82% { transform: translate(-50%, -50%) scale(0.8); animation-timing-function: ease-in; }
+  92% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
+  97% { transform: translate(-50%, -50%) scale(0.9); animation-timing-function: ease-in; }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
