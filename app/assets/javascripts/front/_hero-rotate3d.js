@@ -6,7 +6,7 @@
   $(document).ready(function(){
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      console.log("We respect you 😉");
+      // User has ask to reduce the number of animations
     } else {
 
       var $hero = $('.c-hero');
@@ -15,7 +15,7 @@
 
       if($hero.length){
 
-        var perform = false;
+        var perform = true;
 
         // Initial animation
         $hero.find('.c-hero__logo').show()
@@ -26,8 +26,6 @@
             });
 
         var $logo = $('.c-hero__logo');
-
-        var base = 180;
 
         var height; // Hero's height
         var width; // Hero's width
@@ -46,6 +44,9 @@
         // Check if section is in the viewport and so if we need to perform the animation
         function watchPosition(){
           perform = $(window).scrollTop() >= $hero.offset().top + height ? false : true;
+
+          // Set height to prevent overflow on mobile screen (due to the way mobile browsers handle viewport and address bar)
+          $hero.height($(window).height());
         }
 
         watchPosition();
@@ -72,9 +73,11 @@
         }
 
         $(window).on('mousemove', function(e){
-          window.requestAnimationFrame(function(){
-            updateTransform(e);
-          });
+          if(perform){
+            window.requestAnimationFrame(function(){
+              updateTransform(e);
+            });
+          }
         });
 
       }

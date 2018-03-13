@@ -38,12 +38,7 @@
     }
 
 @keyframes zoom-in {
-  0% { transform: translate(-50%, -50%) scale(0); animation-timing-function: ease-in; }
-  33% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
-  50% { transform: translate(-50%, -50%) scale(0.6); animation-timing-function: ease-in; }
-  66% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
-  82% { transform: translate(-50%, -50%) scale(0.8); animation-timing-function: ease-in; }
-  92% { transform: translate(-50%, -50%) scale(1); animation-timing-function: ease-out; }
-  97% { transform: translate(-50%, -50%) scale(0.9); animation-timing-function: ease-in; }
+  0% { transform: translate(-50%, -50%) scale(0);  }
+  60% {  transform: translate(-50%, -50%) scale(3.5); }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
