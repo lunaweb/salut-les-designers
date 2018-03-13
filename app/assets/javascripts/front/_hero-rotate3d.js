@@ -29,13 +29,16 @@
 
         var height; // Hero's height
         var width; // Hero's width
-        var middle; // Section's middle [x, y]
+        var cx, cy; // Section's center
+        var moveType;
+        var initialOrientation;
 
         // Keep global variables up to date
         function watchDimensions(){
           height = $hero.height();
           width = $hero.width();
-          middle = { x: width/2, y: height/2 };
+          cx = width/2;
+          cy = height/2;
         }
 
         watchDimensions();
@@ -57,28 +60,82 @@
         function updateTransform(e){
           var transformString = 'translate(-50%, -50%) ';
 
-          var cx = middle.x,
-              cy = middle.y,
-              dx = cx - e.clientX,
-              dy = cy - e.clientY,
-              tiltx = (dy / cy),
-              tilty = - (dx / cx),
-              radius = Math.sqrt(Math.pow(tiltx, 2) + Math.pow(tilty, 2)),
-              degree = (radius * 1);
+          var dx, dy, dz;
+          var tiltx, tilty;
 
-          transformString += 'translateZ(' + radius * 10 + 'px) ';
+          if(moveType === 'mouse'){
+            dx = cx - e.clientX;
+            dy = cy - e.clientY;
+
+            var tiltx = (dy / cy);
+            var tilty = - (dx / cx);
+          }
+
+          if(moveType === 'orientation'){
+            var dx = (e.originalEvent.alpha - initialOrientation.alpha) * 0.1;
+            var dy = (e.originalEvent.beta - initialOrientation.beta) * 0.1;
+            var dz = (e.originalEvent.gamma - initialOrientation.gamma) * 0.1;
+
+            if(dx < -5)
+              dx = -5;
+            if(dx > 5)
+              dx = 5;
+
+            if(dy < -5)
+              dy = -5;
+            if(dy > 5)
+              dy = 5;
+
+            if(dz < -5)
+              dz = -5;
+            if(dz > 5)
+              dz = 5;
+
+            var tiltx = dy;
+            var tilty = - (( e.originalEvent.beta / 90) * dx) + ((1 - (e.originalEvent.beta - 90) / 90) * dz);
+          }
+
+          var radius = Math.sqrt(Math.pow(tiltx, 2) + Math.pow(tilty, 2));
+          var degree = (radius * 1);
+
+          if(moveType === 'mouse')
+            transformString += 'translateZ(' + radius * 10 + 'px) ';
+
           transformString += 'rotate3d(' + tiltx + ', ' + tilty + ', ' + '0' + ', ' + degree + 'deg)';
 
           $logo.css('transform', transformString);
         }
 
-        $(window).on('mousemove', function(e){
-          if(perform){
-            window.requestAnimationFrame(function(){
-              updateTransform(e);
-            });
-          }
-        });
+        // Move with
+        if(window.DeviceOrientationEvent && Modernizr.touchevents){
+          moveType = 'orientation';
+
+          $(window).on('deviceorientation', function(e){
+            if(perform){
+              if(!initialOrientation){
+                initialOrientation = {
+                  alpha: e.originalEvent.alpha,
+                  beta: e.originalEvent.beta,
+                  gamma: e.originalEvent.gamma
+                }
+              }
+
+              window.requestAnimationFrame(function(){
+                updateTransform(e);
+              });
+            }
+          });
+        } else {
+          moveType = 'mouse';
+
+          $(window).on('mousemove', function(e){
+            if(perform){
+              window.requestAnimationFrame(function(){
+                updateTransform(e);
+              });
+            }
+          });
+        }
 
       }
     }
