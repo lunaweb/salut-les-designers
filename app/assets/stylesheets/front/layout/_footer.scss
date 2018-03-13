@@ -14,8 +14,14 @@
 }
 
   .footer__link {
+    display: inline-block;
     font-weight: $font-bold;
     text-decoration: underline;
+    transition: transform 0.25s;
+
+    &:hover, &:focus {
+      transform: rotate(-15deg);
+    }
   }
 
   .footer__label,
@@ -49,6 +55,12 @@
           bottom: 0;
           position: absolute;
           right: 0;
+
+          .footer__link {
+            &:hover, &:focus {
+              transform: rotate(15deg);
+            }
+          }
         }
       }
     }
