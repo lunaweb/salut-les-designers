@@ -112,7 +112,7 @@ $echo-portrait-size: em(60px, $base-font-size);
   left: 50%;
   position: absolute;
   overflow: hidden;
-  transform: translateX(-50%);
+  margin-left: rem(-145px);
   white-space: nowrap;
   width: rem(290px);
 
@@ -134,11 +134,14 @@ $echo-portrait-size: em(60px, $base-font-size);
 
 @keyframes echo-fade-in {
   0% {
+    margin-left: rem(-45px);
     opacity: 0;
-    transform: translate(-50%, 2rem);
+    transform: translateY(2rem);
     width: rem(90px);
   }
   50% {
+    margin-left: rem(-45px);
+    transform: translateY(0);
     width: rem(90px);
   }
   100% {
