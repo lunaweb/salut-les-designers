@@ -1,11 +1,12 @@
 - audio = dato.audios.first()
 
 section.c-hero
-  img.c-hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les designers !")
+  .c-hero__plane
+    img.c-hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les designers !")
 
   a.c-hero__echo.c-echo.c-echo--floating (href=audio.url target="_blank" data-teaser="#{audio.teaser_sound.url()}")
     .c-echo__picture
-      img.c-echo__portrait (src=audio.portrait.url(w: 56, h: 56) alt=audio.title)
+      img.c-echo__portrait (src=audio.portrait.url(w: 56, h: 56) alt=audio.title srcset="#{audio.portrait.url(w: 112, h: 112)} 2x")
       .c-echo__bars
         - for i in 1..10
           .c-echo__bar

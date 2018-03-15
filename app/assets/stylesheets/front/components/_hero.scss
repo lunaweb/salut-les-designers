@@ -3,8 +3,15 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  perspective: 5vw;
+
 }
+
+  .c-hero__plane {
+    height: 100%;
+    perspective: 5vw;
+    position: relative;
+    width: 100%;
+  }
 
   .c-hero__logo {
     // font-size: 100vh;
@@ -20,7 +27,6 @@
     top: 50%;
     transform: translate(-50%, -50%);
     transform-origin: 50% 50%;
-    perspective: 1000;
 
     &.is-animate {
       animation: zoom-in 1.5s;

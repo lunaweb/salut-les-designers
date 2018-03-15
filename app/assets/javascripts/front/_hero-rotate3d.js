@@ -72,27 +72,12 @@
           }
 
           if(moveType === 'orientation'){
-            var dx = (e.originalEvent.alpha - initialOrientation.alpha) * 0.1;
-            var dy = (e.originalEvent.beta - initialOrientation.beta) * 0.1;
-            var dz = (e.originalEvent.gamma - initialOrientation.gamma) * 0.1;
+            dx = (e.originalEvent.alpha - initialOrientation.alpha) / 180;
+            dy = (e.originalEvent.beta - initialOrientation.beta) / 90;
+            dz = (e.originalEvent.gamma - initialOrientation.gamma) / 45;
 
-            if(dx < -5)
-              dx = -5;
-            if(dx > 5)
-              dx = 5;
-
-            if(dy < -5)
-              dy = -5;
-            if(dy > 5)
-              dy = 5;
-
-            if(dz < -5)
-              dz = -5;
-            if(dz > 5)
-              dz = 5;
-
-            var tiltx = dy;
-            var tilty = - (( e.originalEvent.beta / 90) * dx) + ((1 - (e.originalEvent.beta - 90) / 90) * dz);
+            var tiltx = dy*2;
+            var tilty = - (( e.originalEvent.beta / 360) * dx) + ((1 - (e.originalEvent.beta - 180) / 90) * dz);
           }
 
           var radius = Math.sqrt(Math.pow(tiltx, 2) + Math.pow(tilty, 2));
@@ -139,8 +124,6 @@
 
       }
     }
-
-
 
   });
 
