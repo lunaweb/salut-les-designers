@@ -1,7 +1,5 @@
 source "http://rubygems.org"
 
-ruby "2.3.0"
-
 gem 'middleman', '~> 4.2'
 gem 'middleman-livereload'
 gem 'middleman-autoprefixer'

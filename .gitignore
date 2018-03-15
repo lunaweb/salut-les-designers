@@ -16,7 +16,7 @@ tmp
 ### Ruby versions managers
 
 /.rvmrc
-/.ruby-version
+#/.ruby-version
 /.ruby-gemset
 /.rbenv-version
 
@@ -78,7 +78,7 @@ Thumbs.db
 ### Ruby versions managers
 
 /.rvmrc
-/.ruby-version
+#/.ruby-version
 /.ruby-gemset
 /.rbenv-version
 
