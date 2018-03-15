@@ -17,18 +17,10 @@ $echo-portrait-size: em(60px, $base-font-size);
   }
 }
 
-  .c-echo__picture,
-  .c-echo__description {
-    // flex: 0 1 auto;
-  }
-
   .c-echo__picture {
     flex: 0 0 auto;
     position: relative;
     height: $echo-portrait-size;
-    // left: em(15px, $base-font-size);
-    // margin-top: (-$echo-portrait-size / 2);
-    // top: 50%;
     width: $echo-portrait-size;
   }
 
@@ -75,7 +67,7 @@ $echo-portrait-size: em(60px, $base-font-size);
       }
 
   .c-echo__description {
-    padding: em(0 10px, $base-font-size);
+    padding-left: em(15px, $base-font-size);
   }
 
     .c-echo__label {
@@ -85,6 +77,7 @@ $echo-portrait-size: em(60px, $base-font-size);
     }
 
     .c-echo__author {
+      line-height: 1;
     }
 
       .c-echo__name {
@@ -118,26 +111,24 @@ $echo-portrait-size: em(60px, $base-font-size);
 .c-echo--floating {
   left: 50%;
   position: absolute;
+  overflow: hidden;
   transform: translateX(-50%);
-  // animation: echo-fade-in 0.5s;
+  white-space: nowrap;
+  width: rem(290px);
 
   &:hover, &:focus {
     transform: translateX(-50%) translateY(-1rem);
   }
 
   .c-echo__description {
+    flex: 0 0 auto;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: normal;
     width: 20rem;
-    // animation: echo-slide-in 1s;
   }
 
   &.is-animate {
-    animation: echo-fade-in 0.5s;
-
-    .c-echo__description {
-      animation: echo-slide-in 1s;
-    }
+    animation: echo-fade-in 1s;
   }
 }
 
@@ -145,12 +136,12 @@ $echo-portrait-size: em(60px, $base-font-size);
   0% {
     opacity: 0;
     transform: translate(-50%, 2rem);
+    width: rem(90px);
   }
-}
-
-@keyframes echo-slide-in {
-  0%, 50% {
-    padding: 0;
-    width: 0;
+  50% {
+    width: rem(90px);
+  }
+  100% {
+    width: rem(290px);
   }
 }
