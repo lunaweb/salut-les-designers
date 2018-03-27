@@ -117,7 +117,7 @@ $echo-portrait-size: em(60px, $base-font-size);
   width: rem(290px);
 
   &:hover, &:focus {
-    transform: translateX(-50%) translateY(-1rem);
+    transform: translateY(-1rem);
   }
 
   .c-echo__description {
