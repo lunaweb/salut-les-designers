@@ -8,6 +8,7 @@
 //= require front/_hero-rotate3d.js
 //= require front/_echo.js
 //= require front/_tale.js
+//= require front/_people.js
 
 // var $win = $(window),
 //     $doc = $(document),
