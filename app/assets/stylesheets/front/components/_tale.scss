@@ -1,0 +1,10 @@
+.c-tale {}
+
+  .c-tale__text {
+    opacity: 0;
+    transition: opacity 0.25s;
+
+    &.is-display {
+      opacity: 1;
+    }
+  }
