@@ -70,6 +70,8 @@
           }
           ticking = true;
         });
+      } else {
+        $logo.addClass('is-display');
       }
 
     }

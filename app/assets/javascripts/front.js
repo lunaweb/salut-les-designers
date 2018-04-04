@@ -9,6 +9,7 @@
 //= require front/_echo.js
 //= require front/_tale.js
 //= require front/_people.js
+//= require front/_starwars.js
 
 // var $win = $(window),
 //     $doc = $(document),

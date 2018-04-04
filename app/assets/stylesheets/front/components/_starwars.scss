@@ -1,0 +1,127 @@
+.c-starwars {
+  height: 100vh;
+  position: relative;
+
+  &.is-initialized {
+    overflow: hidden;
+  }
+}
+
+  .c-starwars__sunset {
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: rem(940px);
+    z-index: -1;
+
+    &::before {
+      content: "";
+      background: $color-sunset;
+      border-radius: 100%;
+      display: block;
+      padding-bottom: 100%;
+      position: absolute;
+      width: 100%;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .is-initialized .c-starwars__perspective {
+    height: 100%;
+    position: relative;
+    transform: perspective(300px) rotateX(20deg) translateY(-40rem);
+    transform-style: preserve-3d;
+  }
+
+  .c-starwars__list {
+    padding: rem(100px) 0;
+    text-align: center;
+
+    .is-initialized & {
+      left: 0;
+      padding: 0;
+      position: absolute;
+      top: calc(100% - #{rem(50px)});
+      transform-style: preserve-3d;
+      width: 100%;
+    }
+  }
+
+    .c-starwars__item {
+      padding: rem(20px);
+
+      @include mq($from: large) {
+        padding: rem(50px) rem(25px);
+      }
+
+      .is-initialized & {
+        transform-style: preserve-3d;
+      }
+    }
+
+      .c-starwars__link {
+        display: block;
+        position: relative;
+
+        .is-initialized & {
+          transform-style: preserve-3d;
+          transform: translate3d(0, 0, 0) rotateX(-20deg);
+          transform-origin: 0 100%;
+        }
+
+        @include mq($from: large) {
+          &:hover, &:focus {
+            color: $color-salmon;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .c-starwars__portrait {
+        border-radius: 50%;
+        left: 50%;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+        z-index: -1;
+        transition: opacity 0.25s, visibility 0.25s;
+
+        @include mq($from: large) {
+          .c-starwars__link:hover &, .c-starwars__link:focus & {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+
+      .c-starwars__name {
+        font-family: $font-secondary;
+        @include font-size(20px, 20px);
+        font-weight: $font-bold;
+        text-transform: uppercase;
+
+        @include mq($from: large) {
+          font-size: rem(30px);
+        }
+      }
+
+        .c-starwars__number {
+          color: $color-red;
+          display: inline-block;
+          font-size: em(14px, 30px);
+          line-height: (14 / 20);
+          transform: rotate(-15deg) translateY(-0.7em);
+        }
+
+      .c-starwars__job {
+        font-family: $font-secondary;
+        @include font-size(14px, 18px);
+
+        @include mq($from: large) {
+          font-size: rem(20px);
+        }
+      }
