@@ -8,8 +8,9 @@
 //= require front/_hero-rotate3d.js
 //= require front/_echo.js
 //= require front/_tale.js
-//= require front/_people.js
+//= require front/_duplicate.js
 //= require front/_starwars.js
+//= require front/_text-fit-width.js
 
 // var $win = $(window),
 //     $doc = $(document),
