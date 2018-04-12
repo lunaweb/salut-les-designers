@@ -1,6 +1,9 @@
 meta(charset="utf-8")
 
-= dato_meta_tags(nil)
+- if content_for?(:seo)
+  = content_for :seo
+- else
+  = dato_meta_tags(nil)
 
 meta(name="viewport" content="width=device-width, initial-scale=1.0")
 

@@ -2,7 +2,8 @@
 layout: front
 ---
 
-- audio = dato.audios.first()
+= content_for(:seo) do
+  = dato_meta_tags(audio)
 
 section.c-episode
 
@@ -24,5 +25,6 @@ section.c-episode
       .c-episode__sound
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/343725208&color=%23181818&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
-    .c-episode__pager
-      a.c-link.c-link--big (href="#") Épisode précédent : Nicolas Baldovini
+    - if prev_audio
+      .c-episode__pager
+        a.c-link.c-link--big (href="/episodes/#{prev_audio.permalink}") = "Épisode précédent : #{prev_audio.title}"

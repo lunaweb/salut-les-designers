@@ -60,6 +60,17 @@ set :slim, { :pretty => true }
 # Dato
 activate :dato
 
+dato.tap do |dato|
+  dato.audios.each_with_index do |audio, i|
+    prev_audio = dato.audios[i+1];
+    proxy "/episodes/#{audio.permalink}", "/templates/episodes/view.html", locals: { audio: audio, prev_audio: prev_audio }
+  end
+end
+ignore "/templates/episodes/view.html.slim"
+
+proxy "/episodes", "/templates/episodes/index.html"
+ignore "/templates/episodes/episodes.html.slim"
+
 ###
 # Environnement-specific confirgurations
 ###
