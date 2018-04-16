@@ -3,6 +3,7 @@
 //= require vendors/jquery.ba-throttle-debounce.min.js
 //= require front/vh-check.js
 //= require_self
+//= require front/_cursor.js
 //= require front/_logo.js
 //= require front/_footer.js
 //= require front/_hero-rotate3d.js

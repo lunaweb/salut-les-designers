@@ -6,10 +6,16 @@
 
 :root {
   --vh-offset: 0px;
+  --mouse-x: 0px;
+  --mouse-y: 0px;
 }
 
 * {
   cursor: url(/assets/images/front/layout/cursor.svg) 10 10, auto;
+
+  .enhanced-cursor & {
+    cursor: none;
+  }
 }
 
 @-ms-viewport {
