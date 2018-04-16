@@ -47,9 +47,6 @@
         // Check if section is in the viewport and so if we need to perform the animation
         function watchPosition(){
           perform = $(window).scrollTop() >= $hero.offset().top + height ? false : true;
-
-          // Set height to prevent overflow on mobile screen (due to the way mobile browsers handle viewport and address bar)
-          $hero.height($(window).height());
         }
 
         watchPosition();

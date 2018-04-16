@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --vh-offset: 0px;
+}
+
 * {
   cursor: url(/assets/images/front/layout/cursor.svg) 10 10, auto;
 }
