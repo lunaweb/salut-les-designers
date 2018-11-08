@@ -16,6 +16,12 @@
         $cursor.attr('style', '--mouse-x: ' + e.clientX + 'px; --mouse-y: ' + e.clientY + 'px;');
       });
 
+      $('.js-cursor-vanish').on('mouseenter', function(){
+        $cursor.addClass('is-hovering');
+      }).on('mouseout', function(){
+        $cursor.removeClass('is-hovering');
+      });
+
       $(document)
         .delegate('a, button', 'mouseenter', function(){
           $cursor.removeClass('is-ticking');

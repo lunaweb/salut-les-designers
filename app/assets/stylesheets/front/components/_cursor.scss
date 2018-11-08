@@ -6,13 +6,15 @@
   pointer-events: none;
   position: fixed;
   top: var(--mouse-y);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   width: rem(20px);
   z-index: 10;
-  transition: opacity 0.25s;
+  transition: opacity 0.25s, transform 0.25s;
 
-  &.is-hovering {
+  &.is-hovering,
+  &.is-a-rogue {
     opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0);
   }
 }
 
