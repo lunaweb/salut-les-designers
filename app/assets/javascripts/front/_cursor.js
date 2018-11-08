@@ -16,15 +16,15 @@
         $cursor.attr('style', '--mouse-x: ' + e.clientX + 'px; --mouse-y: ' + e.clientY + 'px;');
       });
 
-      $('a, button')
-        .on('mouseenter', function(){
+      $(document)
+        .delegate('a, button', 'mouseenter', function(){
           $cursor.removeClass('is-ticking');
           $cursor.addClass('is-hovering');
         })
-        .on('mouseleave', function(){
+        .delegate('a, button', 'mouseleave', function(){
           $cursor.removeClass('is-hovering');
         })
-        .on('mouseup', function(){
+        .delegate('a, button', 'mouseup', function(){
           $cursor.addClass('is-ticking');
         });
 
