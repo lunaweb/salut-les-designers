@@ -1,11 +1,38 @@
+$starwars-perspective: 500px;
+$starwars-perspective-rotation: 25deg;
+
 .c-starwars {
-  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: calc(100vh - var(--vh-offset));
   position: relative;
 
   &.is-initialized {
+    display: block;
+    height: 100vh;
+    height: calc(100vh - var(--vh-offset));
     overflow: hidden;
   }
+
+  @include mq($until: large) {
+    padding-top: rem(125px);
+  }
+
+  @include mq($from: large) {
+    padding-top: rem(175px);
+  }
 }
+
+  .c-starwars__inner {
+    height: 100%;
+
+    .c-starwars:not(.is-initialized) & {
+      display: flex;
+      align-items: center;
+    }
+  }
 
   .c-starwars__sunset {
     left: 50%;
@@ -13,7 +40,6 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    max-width: rem(940px);
     z-index: -1;
 
     &::before {
@@ -25,29 +51,48 @@
       position: absolute;
       width: 100%;
       transform: translate(0, -50%);
+
+    }
+
+    @media only screen and (orientation: landscape) {
+      width: 125vh;
+    }
+
+    @media only screen and (orientation: portrait) {
+      width: 125vw;
     }
   }
 
   .is-initialized .c-starwars__perspective {
     height: 100%;
     position: relative;
-    transform: perspective(300px) rotateX(20deg) translateY(-40rem);
+    transform: perspective($starwars-perspective) translateY(-$starwars-perspective/2) rotateX($starwars-perspective-rotation);
     transform-style: preserve-3d;
   }
 
   .c-starwars__list {
-    padding: rem(100px) 0;
     text-align: center;
 
     .is-initialized & {
       left: 0;
       padding: 0;
       position: absolute;
-      top: calc(100% - #{rem(50px)});
+      top: 100%;
       transform-style: preserve-3d;
       width: 100%;
+
+      &.no-transition {
+        transition: none;
+      }
     }
   }
+
+    .is-initialized .c-starwars__group {
+      padding-bottom: calc(50vh);
+      backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
+      transform-style: preserve-3d;
+    }
 
     .c-starwars__item {
       padding: rem(20px);
@@ -67,7 +112,7 @@
 
         .is-initialized & {
           transform-style: preserve-3d;
-          transform: translate3d(0, 0, 0) rotateX(-20deg);
+          transform: translate3d(0, 0, 0) rotateX(-$starwars-perspective-rotation);
           transform-origin: 0 100%;
         }
 
@@ -120,6 +165,7 @@
       .c-starwars__job {
         font-family: $font-secondary;
         @include font-size(14px, 18px);
+        text-transform: uppercase;
 
         @include mq($from: large) {
           font-size: rem(20px);

@@ -3,15 +3,17 @@ layout: front
 ---
 
 section.c-starwars.js-starwars
-  .c-starwars__sunset
-  .container.c-starwars__perspective
-    .c-starwars__list
-      - dato.audios.each do |audio|
-        .c-starwars__item
-          a.c-starwars__link (href="/episodes/#{audio.permalink}")
-            img.c-starwars__portrait (src=audio.portrait.url(w: 220, h: 220) alt=audio.title srcset="#{audio.portrait.url(w: 440, h: 440)} 2x")
-            .c-starwars__name
-              = audio.title
-              .c-starwars__number
-                | N° #{audio.number}
-            .c-starwars__job = audio.subtitle
+  .c-starwars__inner
+    .c-starwars__sunset
+    .container.c-starwars__perspective
+      .c-starwars__list
+        .c-starwars__group
+          - dato.audios.each do |audio|
+            .c-starwars__item
+              a.c-starwars__link (href="/episodes/#{audio.permalink}.html")
+                img.c-starwars__portrait (src=audio.portrait.url(w: 220, h: 220) alt=audio.title srcset="#{audio.portrait.url(w: 440, h: 440)} 2x")
+                .c-starwars__name
+                  = audio.title
+                  .c-starwars__number
+                    | N° #{audio.number}
+                .c-starwars__job = audio.subtitle
