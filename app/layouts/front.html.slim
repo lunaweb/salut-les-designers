@@ -1,17 +1,19 @@
 doctype html
 html(lang="fr" class="no-js")
 
-  head
-    = render :partial => "layouts/front/head"
+  .l-wrapper
 
-  body(class=body_class id="top")
-    header.header(id="header")
-      = render :partial => "layouts/front/header"
-    nav.nav(id="nav")
-      = render :partial => "layouts/front/nav"
-    main.main(id="main")
-      = yield
-    footer.footer(id="footer")
-      = render :partial => "layouts/front/footer"
+    head
+      = render :partial => "layouts/front/head"
 
-    = render :partial => "layouts/front/foot"
+    body(class=body_class id="top")
+      header.header(id="header")
+        = render :partial => "layouts/front/header"
+      nav.nav(id="nav")
+        = render :partial => "layouts/front/nav"
+      main.main(id="main")
+        = yield
+      footer.footer(id="footer")
+        = render :partial => "layouts/front/footer"
+
+      = render :partial => "layouts/front/foot"

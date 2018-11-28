@@ -60,24 +60,10 @@
 
     .c-episode__sound {
       margin-top: rem(60px);
-      position: relative;
 
       @include mq($from: 1020px) {
         margin: rem(100px) rem(-100px) 0;
       }
-
-      &::before {
-        content: "";
-        bottom: rem(-50px);
-        left: rem(-50px);
-        // pointer-events: none;
-        position: absolute;
-        right: rem(-50px);
-        top: rem(-50px);
-        z-index: -1;
-      }
-
-      // iframe { pointer-events: none; }
     }
 
   .c-episode__pager {
