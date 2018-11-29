@@ -150,7 +150,12 @@ $starwars-perspective-rotation: 25deg;
         font-family: $font-secondary;
         @include font-size(20px, 20px);
         font-weight: $font-bold;
+        position: relative;
         text-transform: uppercase;
+
+        @include mq($until: large) {
+          padding-top: 0.5em;
+        }
 
         @include mq($from: large) {
           font-size: rem(30px);
@@ -163,6 +168,13 @@ $starwars-perspective-rotation: 25deg;
           font-size: em(14px, 30px);
           line-height: (14 / 20);
           transform: rotate(-15deg) translateY(-0.7em);
+
+          @include mq($until: large) {
+            left: 50%;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%) rotate(-15deg) translateY(-0.7em);
+          }
         }
 
       .c-starwars__job {
