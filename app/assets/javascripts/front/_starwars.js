@@ -4,43 +4,202 @@
 (function(){
   'use strict';
 
-  $(document).ready(function(){
-    /**
-     * VARIABLES
-     */
-    // Elements
+  // CLASS
+  var StarWars = (function(){
+    // Constructor
+    function StarWars($element, settings){
+      var _ = this;
+
+      _.settings = $.extend(true, {
+        clone: 2,
+        autoscrollSpeed: 0.5,
+        autoscrollHoverSpeed: 0.25,
+        NF: 250*60/1000, // Number of frames : equivalent to 250ms at 60fps
+        timing: function(k){ return 1 - Math.pow(1 - k, 1); },
+      }, settings || {});
+
+      _.elements = {};
+      _.elements.$root = $element;
+      _.elements.$list = _.elements.$root.find('.c-starwars__list');
+      _.elements.$group = _.elements.$root.find('.c-starwars__group');
+
+      // Scroll calculation
+      _.scroll = {
+        pos: 0, // Position to go
+        lastRequestPos: 0, // Last position when animation requested (autoplay or first scroll)
+        lastPos: 0,  // Last position set
+        diff: 0, // Difference scrollPos and lastRequestPos
+      };
+
+      // RAF variables
+      _.autoscrollRID;
+      _.animateRID;
+      _.autoscrollTick = true;
+      _.dir = 0; // -1 : scroll down / 1 : scroll up
+      _.f = 0;
+
+      _.hovered = false;
+
+      _.init();
+    }
+
+    // Methods
+    StarWars.prototype.init = function(){
+      var _ = this;
+
+      _.scroll.pos = 0;
+      _.scroll.lastPos = 0;
+      _.dir = 0;
+      _.f = 0;
+
+      // Clone groups
+      for(var i=0; i<_.settings.clone; i++){
+        _.elements.$list.append(_.elements.$group.clone().addClass('is-clone'));
+      }
+
+      // Listen scroll
+      _.elements.$root.mousewheel($.proxy(_.listenScroll, _));
+
+      // Slow down autoscroll on hover
+      _.elements.$list.on('mouseenter', function(){ _.hovered = true; })
+        .on('mouseleave', function(){ _.hovered = false; });
+
+      _.elements.$root.addClass('is-initialized');
+
+      // Launch
+      _.autoscrollTick = true;
+      _.autoscrollRID = requestAnimationFrame($.proxy(_.autoscroll, _));
+    };
+
+    StarWars.prototype.remove = function(){
+      var _ = this;
+
+      _.elements.$root.unmousewheel($.proxy(_.listenScroll, _));
+
+      _.stopAutoscroll();
+      _.stopAnimation();
+      _.elements.$list.removeAttr('style');
+
+      _.elements.$root.find('.c-starwars__group.is-clone').remove();
+
+      _.elements.$root.removeClass('is-initialized');
+    };
+
+    StarWars.prototype.autoscroll = function(){
+      var _ = this;
+
+      if(_.autoscrollTick){
+        _.dir = -1;
+        _.scroll.pos += -(_.hovered ? 0.25 : 0.5);
+
+        if(_.animateRID) _.stopAnimation();
+        _.animateRID = requestAnimationFrame($.proxy(_.animate, _));
+      }
+
+      _.autoscrollRID = requestAnimationFrame($.proxy(_.autoscroll, _));
+    };
+
+    StarWars.prototype.stopAutoscroll = function(){
+      var _ = this;
+
+      cancelAnimationFrame(_.autoscrollRID);
+      _.autoscrollRID = null;
+      _.autoscrollTick = false;
+    };
+
+    StarWars.prototype.listenScroll = function(e){
+      var _ = this;
+
+      _.autoscrollTick = false;
+
+      _.dir = e.deltaY < 0 ? -1 : 1;
+      _.scroll.pos += _.roundValue(e.deltaY * e.deltaFactor * 0.5);
+
+      if(_.animateRID) _.stopAnimation();
+      _.animateRID = requestAnimationFrame($.proxy(_.animate, _));
+    };
+
+    StarWars.prototype.stopAnimation = function(){
+      var _ = this;
+
+      cancelAnimationFrame(_.animateRID);
+      _.animateRID = null;
+
+      _.f = 0;
+      _.scroll.lastRequestPos = _.scroll.lastPos;
+    };
+
+    StarWars.prototype.animate = function(){
+      var _ = this;
+
+      _.f++;
+
+      var k = _.f/_.settings.NF;
+
+      var newPos = _.getNewPosition(k);
+
+      if(newPos !== _.scroll.lastPos){
+        _.scroll.lastPos = newPos;
+        _.elements.$list.css('transform','translate3d(0, ' + _.scroll.lastPos + 'px, 0)');
+      }
+
+      if(!(_.f%_.settings.NF)){
+        _.autoscrollTick = true;
+        _.scroll.lastPos = _.scroll.pos;
+        _.stopAnimation();
+        return;
+      }
+      _.animateRID = requestAnimationFrame($.proxy(_.animate, _));
+    };
+
+    StarWars.prototype.getNewPosition = function(k){
+      var _ = this;
+      var newPos = 0;
+
+      // Top edge
+      if(_.scroll.pos > 0)
+        _.scroll.pos = 0;
+
+      if(!_.scroll.lastRequestPos) _.scroll.lastRequestPos = _.scroll.lastPos;
+
+      _.scrollDiff = _.scroll.pos - _.scroll.lastRequestPos;
+
+      newPos = _.scroll.lastRequestPos + (_.settings.timing(k) * _.scrollDiff);
+      // Prevent newPos to go further than scrollPos
+      if(_.dir === -1 && newPos < _.scroll.pos) newPos = _.scroll.pos;
+      if(_.dir === 1 && newPos > _.scroll.pos) newPos = _.scroll.pos;
+
+      // Point where infinite begin
+      if(newPos * -1 >= (_.elements.$list.height() / (_.settings.clone+1)) * _.settings.clone){
+        _.stopAnimation();
+        newPos = _.scroll.pos = -1 * _.elements.$list.height() / (_.settings.clone+1);
+      }
+
+      return _.roundValue(newPos);
+    };
+
+    StarWars.prototype.roundValue = function(value){
+      return parseFloat(value.toFixed(2));
+    };
+
+    return StarWars;
+  })();
+
+  // SCRIPTS
+  $(document)
+    .ready(function(){ init(); })
+    .on('turbolinks:load', function(e){ if(e.originalEvent.data.timing.visitStart) init(); });
+
+  function init(){
     var $scene = $('.js-starwars');
-    var $list = $scene.find('.c-starwars__list');
-    var $group = $scene.find('.c-starwars__group');
-    var cloneNumber = 2;
 
-    // Scroll calculation
-    var scrollPos = 0; // Position to go
-    var lastRequestScrollPos = 0; // Last position when animation requested (autoplay or first scroll)
-    var lastScrollPos = 0;  // Last position set
-    var scrollDiff = 0; // Difference scrollPos and lastRequestPos
-
-    // Scene states
-    var canEnhance = isWideEnough();
-    var isHovered = false;
-
-    // RAF variables
-    var autoscrollRID;
-    var animateRID;
-    var autoscrollTick = true;
-    var dir = 0; // -1 : scroll down / 1 : scroll up
-    var f = 0;
-    var NF = 250*60/1000; // Number of frames : equivalent to 250ms at 60fps
-    var timing = function(k){ return 1 - Math.pow(1 - k, 1); };
-
-    /**
-     * SCRIPTS
-     */
-    if($scene.length && !isMobile()){
+    if($scene.length && !Front.isMobile()){
+      var canEnhance = isWideEnough();
+      var scene;
 
       // Spaceship ignition
       if(canEnhance){
-        initScene();
+        scene = new StarWars($scene);
       }
 
       // Control center
@@ -48,136 +207,17 @@
         var lastStatus = canEnhance;
         canEnhance = isWideEnough();
 
-        if(!lastStatus && isWideEnough()) initScene();
-        if(lastStatus && !isWideEnough()) removeScene();
+        if(!lastStatus && isWideEnough()){
+          if(scene)
+            scene.init();
+          else
+            scene = new StarWars($scene);
+        }
+        if(lastStatus && !isWideEnough()){
+          if(scene)
+            scene.remove();
+        }
       }));
-
-    }
-
-    /**
-     * FUNCTIONS
-     */
-    function initScene(){
-      scrollPos = 0;
-      lastScrollPos = 0;
-      dir = 0;
-      f = 0;
-
-      // Clone groups
-      for(var i=0; i<cloneNumber; i++){
-        $list.append($group.clone().addClass('is-clone'));
-      }
-
-      // Listen scroll
-      $scene.mousewheel(listenScroll);
-
-      // Slow down autoscroll on hover
-      $list.on('mouseenter', function(){ isHovered = true; })
-        .on('mouseleave', function(){ isHovered = false; });
-
-      $scene.addClass('is-initialized');
-
-      // Launch
-      autoscrollTick = true;
-      autoscrollRID = requestAnimationFrame(autoscroll);
-    }
-
-    function removeScene(){
-      $scene.unmousewheel(listenScroll);
-
-      stopAutoscroll();
-      stopAnimation();
-      $list.removeAttr('style');
-
-      $scene.find('.c-starwars__group.is-clone').remove();
-
-      $scene.removeClass('is-initialized');
-    }
-
-    function autoscroll() {
-      if(autoscrollTick){
-        dir = -1;
-        scrollPos += -(isHovered ? 0.25 : 0.5);
-
-        if(animateRID) stopAnimation();
-        animateRID = requestAnimationFrame(animate);
-      }
-
-      autoscrollRID = requestAnimationFrame(autoscroll);
-    }
-
-    function stopAutoscroll(){
-      cancelAnimationFrame(autoscrollRID);
-      autoscrollRID = null;
-      autoscrollTick = false;
-    }
-
-    function listenScroll(e){
-      autoscrollTick = false;
-
-      dir = e.deltaY < 0 ? -1 : 1;
-      scrollPos += roundValue(e.deltaY * e.deltaFactor * 0.5);
-
-      if(animateRID) stopAnimation();
-      animateRID = requestAnimationFrame(animate);
-    }
-
-    function stopAnimation(){
-      cancelAnimationFrame(animateRID);
-      animateRID = null;
-
-      f = 0;
-      lastRequestScrollPos = lastScrollPos;
-    }
-
-    function animate(){
-      f++;
-
-      var k = f/NF;
-
-      var newPos = getNewPosition(k);
-
-      if(newPos !== lastScrollPos){
-        lastScrollPos = newPos;
-        $list.css('transform','translate3d(0, ' + lastScrollPos + 'px, 0)');
-      }
-
-      if(!(f%NF)){
-        autoscrollTick = true;
-        lastScrollPos = scrollPos;
-        stopAnimation();
-        return;
-      }
-      animateRID = requestAnimationFrame(animate);
-    }
-
-    function getNewPosition(k){
-      var newPos = 0;
-
-      // Top edge
-      if(scrollPos > 0)
-        scrollPos = 0;
-
-      if(!lastRequestScrollPos) lastRequestScrollPos = lastScrollPos;
-
-      scrollDiff = scrollPos - lastRequestScrollPos;
-
-      newPos = lastRequestScrollPos + (timing(k) * scrollDiff);
-      // Prevent newPos to go further than scrollPos
-      if(dir === -1 && newPos < scrollPos) newPos = scrollPos;
-      if(dir === 1 && newPos > scrollPos) newPos = scrollPos;
-
-      // Point where infinite begin
-      if(newPos * -1 >= ($list.height() / (cloneNumber+1)) * cloneNumber){
-        stopAnimation();
-        newPos = scrollPos = -1 * $list.height() / (cloneNumber+1);
-      }
-
-      return roundValue(newPos);
-    }
-
-    function roundValue(value){
-      return parseFloat(value.toFixed(2));
     }
 
     function isWideEnough(){
@@ -187,16 +227,6 @@
 
       return false;
     }
-
-    function isMobile(){
-      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        return true;
-      }
-
-      return false;
-    }
-
-
-  });
+  }
 
 })();

@@ -8,16 +8,18 @@ html(lang="fr" class="no-js")
 
     .l-wrapper
 
-      header.header(id="header")
+      header.header(id="header" data-turbolinks-permanent="")
         = render :partial => "layouts/front/header"
 
-      nav.nav(id="nav")
+      nav.nav(id="nav" data-turbolinks-permanent="")
         = render :partial => "layouts/front/nav"
 
       main.main(id="main")
         = yield
 
-      footer.footer(id="footer")
+      footer.footer(id="footer" data-turbolinks-permanent="")
         = render :partial => "layouts/front/footer"
+
+    #turbolinks-permanent(data-turbolinks-permanent="")
 
     = render :partial => "layouts/front/foot"

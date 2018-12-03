@@ -10,14 +10,19 @@
   .header__logo {
     backface-visibility: hidden;
     display: inline-block;
-    opacity: 0;
+    // opacity: 0;
     margin: rem(10px);
-    visibility: hidden;
+    // visibility: hidden;
     transition: opacity 0.25s, visibility 0.25s, transform 100ms linear;
 
-    &.is-display,
-    .no-js & {
-      opacity: 1;
-      visibility: visible;
+    // &.is-display,
+    // .no-js & {
+    //   opacity: 1;
+    //   visibility: visible;
+    // }
+
+    &.is-hiding {
+      opacity: 0;
+      visibility: hidden;
     }
   }

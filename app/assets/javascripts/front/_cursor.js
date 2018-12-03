@@ -4,38 +4,46 @@
   'use strict';
 
   $(document).ready(function(){
-
     if (window.CSS && CSS.supports('top', 'var(--mouse-y)') && $('html').hasClass('no-touchevents')) {
+      Cursor.init();
+    }
+  });
 
-      var $cursor = $('<div class="cursor"><div class="cursor__tick"></div></div>');
+  var Cursor = {
+    elements: {
+      $cursor: false,
+    },
+
+    init: function(){
+      var _ = this;
+
+      _.elements.$cursor = $('<div class="cursor" id="cursor"><div class="cursor__tick"></div></div>');
 
       $('html').addClass('enhanced-cursor');
-      $('body').append($cursor);
+      Front.getPermanentRoot().append(_.elements.$cursor);
 
       $(window).on('mousemove', function(e){
-        $cursor.attr('style', '--mouse-x: ' + e.clientX + 'px; --mouse-y: ' + e.clientY + 'px;');
+        _.elements.$cursor.attr('style', '--mouse-x: ' + e.clientX + 'px; --mouse-y: ' + e.clientY + 'px;');
       });
 
       $('.js-cursor-vanish').on('mouseenter', function(){
-        $cursor.addClass('is-hovering');
+        _.elements.$cursor.addClass('is-hovering');
       }).on('mouseout', function(){
-        $cursor.removeClass('is-hovering');
+        _.elements.$cursor.removeClass('is-hovering');
       });
 
       $(document)
         .delegate('a, button', 'mouseenter', function(){
-          $cursor.removeClass('is-ticking');
-          $cursor.addClass('is-hovering');
+          _.elements.$cursor.removeClass('is-ticking');
+          _.elements.$cursor.addClass('is-hovering');
         })
         .delegate('a, button', 'mouseleave', function(){
-          $cursor.removeClass('is-hovering');
+          _.elements.$cursor.removeClass('is-hovering');
         })
         .delegate('a, button', 'mouseup', function(){
-          $cursor.addClass('is-ticking');
+          _.elements.$cursor.addClass('is-ticking');
         });
-
     }
-
-  });
+  };
 
 })();
