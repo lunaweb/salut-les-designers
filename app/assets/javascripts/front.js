@@ -12,6 +12,7 @@
 //= require front/_tale.js
 //= require front/_starwars.js
 //= require front/_episode.js
+//= require front/_transitions.js
 
 // var $win = $(window),
 //     $doc = $(document),
