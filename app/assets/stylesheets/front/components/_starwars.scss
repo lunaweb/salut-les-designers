@@ -7,7 +7,7 @@ $starwars-perspective-rotation: 25deg;
   justify-content: center;
   min-height: 100vh;
   min-height: calc(100vh - var(--vh-offset));
-  padding-bottom: rem(190px);
+  padding-bottom: rem(125px);
   position: relative;
 
   &.is-initialized {
@@ -23,18 +23,20 @@ $starwars-perspective-rotation: 25deg;
   }
 
   @include mq($from: large) {
-    padding-top: rem(175px);
+    // padding-top: rem(175px);
   }
 }
 
   .c-starwars__inner {
     height: 100%;
     overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 20px, black 170px);
 
     .c-starwars:not(.is-initialized) & {
       display: flex;
       align-items: center;
       overflow: visible;
+      mask-image: none;
     }
   }
 
@@ -113,6 +115,7 @@ $starwars-perspective-rotation: 25deg;
       .c-starwars__link {
         display: block;
         position: relative;
+        transition: opacity 150ms;
 
         .is-initialized & {
           transform-style: preserve-3d;

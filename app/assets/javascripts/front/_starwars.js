@@ -11,6 +11,7 @@
       var _ = this;
 
       _.settings = $.extend(true, {
+        minimumPos: -240,
         clone: 2,
         autoscrollSpeed: 0.5,
         autoscrollHoverSpeed: 0.25,
@@ -47,8 +48,8 @@
     StarWars.prototype.init = function(){
       var _ = this;
 
-      _.scroll.pos = 0;
-      _.scroll.lastPos = 0;
+      _.scroll.pos = _.settings.minimumPos;
+      _.scroll.lastPos = _.settings.minimumPos;
       _.dir = 0;
       _.f = 0;
 
@@ -56,6 +57,8 @@
       for(var i=0; i<_.settings.clone; i++){
         _.elements.$list.append(_.elements.$group.clone().addClass('is-clone'));
       }
+
+      _.elements.$list.css('transform','translate3d(0, ' + _.settings.minimumPos + 'px, 0)');
 
       // Listen scroll
       _.elements.$root.mousewheel($.proxy(_.listenScroll, _));
@@ -109,6 +112,7 @@
 
     StarWars.prototype.listenScroll = function(e){
       var _ = this;
+      e.preventDefault();
 
       _.autoscrollTick = false;
 
@@ -154,11 +158,11 @@
 
     StarWars.prototype.getNewPosition = function(k){
       var _ = this;
-      var newPos = 0;
+      var newPos = _.settings.minimumPos;
 
       // Top edge
-      if(_.scroll.pos > 0)
-        _.scroll.pos = 0;
+      if(_.scroll.pos > _.settings.minimumPos)
+        _.scroll.pos = _.settings.minimumPos;
 
       if(!_.scroll.lastRequestPos) _.scroll.lastRequestPos = _.scroll.lastPos;
 
@@ -220,14 +224,14 @@
           }
         }));
       }
+    }
 
-      function isWideEnough(){
-        if (window.matchMedia("(min-width: 960px)").matches) {
-          return true;
-        }
-
-        return false;
+    function isWideEnough(){
+      if (window.matchMedia("(min-width: 960px)").matches) {
+        return true;
       }
+
+      return false;
     }
   }
 
