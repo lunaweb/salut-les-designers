@@ -27,9 +27,9 @@
       });
 
       $('.js-cursor-vanish').on('mouseenter', function(){
-        _.elements.$cursor.addClass('is-hovering');
+        _.elements.$cursor.addClass('is-a-rogue');
       }).on('mouseout', function(){
-        _.elements.$cursor.removeClass('is-hovering');
+        _.elements.$cursor.removeClass('is-a-rogue');
       });
 
       $(document)
