@@ -81,7 +81,7 @@
   var looney = null;
 
   $(document).on('turbolinks:before-visit', function(e){
-    if(!transitioning){
+    if(!transitioning && !Front.reduceMotion){
       e.preventDefault();
 
       transitioning = true;

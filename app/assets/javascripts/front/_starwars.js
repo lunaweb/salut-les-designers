@@ -186,46 +186,48 @@
   })();
 
   // SCRIPTS
-  $(document)
-    .ready(function(){ init(); })
-    .on('turbolinks:load', function(e){ if(e.originalEvent.data.timing.visitStart) init(); });
+  if(!Front.reduceMotion){
+    $(document)
+      .ready(function(){ init(); })
+      .on('turbolinks:load', function(e){ if(e.originalEvent.data.timing.visitStart) init(); });
 
-  function init(){
-    var $scene = $('.js-starwars');
+    function init(){
+      var $scene = $('.js-starwars');
 
-    if($scene.length && !Front.isMobile()){
-      var canEnhance = isWideEnough();
-      var scene;
+      if($scene.length && !Front.isMobile()){
+        var canEnhance = isWideEnough();
+        var scene;
 
-      // Spaceship ignition
-      if(canEnhance){
-        scene = new StarWars($scene);
+        // Spaceship ignition
+        if(canEnhance){
+          scene = new StarWars($scene);
+        }
+
+        // Control center
+        $(window).resize($.throttle(250, function(){
+          var lastStatus = canEnhance;
+          canEnhance = isWideEnough();
+
+          if(!lastStatus && isWideEnough()){
+            if(scene)
+              scene.init();
+            else
+              scene = new StarWars($scene);
+          }
+          if(lastStatus && !isWideEnough()){
+            if(scene)
+              scene.remove();
+          }
+        }));
       }
 
-      // Control center
-      $(window).resize($.throttle(250, function(){
-        var lastStatus = canEnhance;
-        canEnhance = isWideEnough();
-
-        if(!lastStatus && isWideEnough()){
-          if(scene)
-            scene.init();
-          else
-            scene = new StarWars($scene);
+      function isWideEnough(){
+        if (window.matchMedia("(min-width: 960px)").matches) {
+          return true;
         }
-        if(lastStatus && !isWideEnough()){
-          if(scene)
-            scene.remove();
-        }
-      }));
-    }
 
-    function isWideEnough(){
-      if (window.matchMedia("(min-width: 960px)").matches) {
-        return true;
+        return false;
       }
-
-      return false;
     }
   }
 

@@ -75,7 +75,9 @@
       var episode = new Episode($episode);
 
       // Hide Content
-      episode.elements.$root.addClass('animate-pending');
+      if(!Front.reduceMotion){
+        episode.elements.$root.addClass('animate-pending');
+      }
 
       // Reveal content
       if(listenLoad === true){
@@ -90,7 +92,9 @@
 
   function revealEpisode(episode){
     episode.fitTexts();
-    episode.elements.$root.addClass('animate-running');
+    if(!Front.reduceMotion){
+      episode.elements.$root.addClass('animate-running');
+    }
   }
 
 })();
