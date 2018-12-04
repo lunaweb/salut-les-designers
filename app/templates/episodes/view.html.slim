@@ -16,10 +16,15 @@ section.c-episode
       .c-episode__number
         | N° #{audio.number}
 
-    - if audio.description.present? || audio.player_url.present?
+    - if audio.description.present? || audio.url.present? || audio.player_url.present?
       .c-episode__body
-        - if audio.description.present?
-          .c-text.c-episode__description = audio.description
+        - if audio.description.present? || audio.url.present?
+          .c-text.c-episode__description
+            - if audio.description.present?
+              = audio.description
+            - if audio.url.present?
+              p
+                a.c-link.c-link--bubble.c-link--external.c-link--red(href=audio.url target="_blank") = "Lire l'interview"
 
         - if audio.player_url.present?
           .c-episode__sound

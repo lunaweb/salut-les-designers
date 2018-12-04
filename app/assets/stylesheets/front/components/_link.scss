@@ -38,7 +38,7 @@
   .c-link--external {
     &::after {
       content: "";
-      background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjRkZGIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+") no-repeat;
+      background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjRkZGIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==") no-repeat;
       bottom: 0;
       height: rem(11px);
       position: absolute;
@@ -50,7 +50,7 @@
 
     &:hover, &:focus {
       &::after {
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjRkYwMDFFIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+");
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjRkYwMDFFIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==");
       }
     }
   }
@@ -67,5 +67,25 @@
   .c-link--white {
     &:not(:hover):not(:focus) {
       color: #fff;
+    }
+  }
+
+  .c-link--red {
+    color: $color-red;
+
+    &:hover, &:focus {
+      color: $color-foreground;
+    }
+
+    &.c-link--external {
+      &::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjRkYwMDFFIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==");
+      }
+
+      &:hover, &:focus {
+        &::after {
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEuMzU0IDEuNWg4djhtLTggMGw4LTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjMTgxODE4IiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==");
+        }
+      }
     }
   }
