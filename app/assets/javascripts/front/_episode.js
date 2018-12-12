@@ -80,13 +80,10 @@
       }
 
       // Reveal content
-      if(listenLoad === true){
-        $(window).on('load', function(){
-          revealEpisode(episode);
-        });
-      } else {
+      var font = new FontFaceObserver('Ace', {weight: 600});
+      font.load().then(function () {
         revealEpisode(episode);
-      }
+      });
     }
   }
 
