@@ -32,12 +32,10 @@
             _.createAudio();
           }
 
-          if(_.track.paused){
-            _.track.play();
-          }
+          _.playAudio();
         })
         .on('mouseleave blur', function(){
-          _.track.pause();
+          _.pauseAudio();
         });
     };
 
@@ -47,6 +45,31 @@
       _.elements.$audio = $('<audio class="c-echo__audio" loop><source src="' + _.settings.teaser + '" type="audio/' + _.settings.teaser.substr(-3) + '"/></audio>');
       _.elements.$root.append(_.elements.$audio);
       _.track = _.elements.$audio.get(0);
+    };
+
+    Echo.prototype.playAudio = function(){
+      var _ = this;
+
+      if(_.track.paused){
+        var promise = _.track.play();
+        _.elements.$root.addClass('is-playing');
+
+        if(typeof promise !== 'undefined'){
+          promise.then(function(){
+            // Audio playing
+          }).catch(function(){
+            // Audio not playing
+            _.pauseAudio();
+          });
+        }
+      }
+    };
+
+    Echo.prototype.pauseAudio = function(){
+      var _ = this;
+
+      _.track.pause();
+      _.elements.$root.removeClass('is-playing');
     };
 
     return Echo;
