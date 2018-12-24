@@ -1,10 +1,11 @@
 .c-text {
-  font-size: rem(30px);
+  font-size: rem(22px);
   line-height: (36 / 30);
   text-align: center;
 
   &--big {
     font-family: $font-secondary;
+    font-size: rem(30px);
   }
 
   * {
@@ -20,6 +21,8 @@
 @include mq($from: large) {
 
   .c-text {
+    font-size: rem(30px);
+
     &--big {
       font-size: rem(60px);
       line-height: (70 / 60);

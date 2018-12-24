@@ -47,8 +47,16 @@
   }
 
     .footer__item {
+      @include mq($until: small) {
+        &--contact {
+          display: none;
+        }
+      }
+
       @include mq($from: medium) {
-        margin-left: rem(50px);
+        & + & {
+          margin-left: rem(50px);
+        }
 
         &--contact {
           margin-left: 0;
@@ -63,6 +71,7 @@
           }
         }
       }
+
     }
 
 @keyframes footer-fade-in {

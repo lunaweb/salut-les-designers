@@ -1,10 +1,12 @@
 - audio = dato.audios.first()
 
+h1.u-visually-hidden Salut Les Designers !
+
 section.c-hero
   .c-hero__plane
     img.c-hero__logo (src="/assets/images/front/logo-text.svg" alt="Salut Les designers !")
 
-  a.c-hero__echo.c-echo.c-echo--floating (href=audio.url target="_blank" data-teaser="#{audio.teaser_sound ? audio.teaser_sound.url() : ''}")
+  a.c-hero__echo.c-echo.c-echo--floating (href="/episodes/#{audio.permalink}.html" data-teaser="#{audio.teaser_sound ? audio.teaser_sound.url() : ''}")
     .c-echo__picture
       img.c-echo__portrait (src=audio.portrait.url(w: 56, h: 56) alt=audio.title srcset="#{audio.portrait.url(w: 112, h: 112)} 2x")
       .c-echo__bars
@@ -15,13 +17,3 @@ section.c-hero
 		p.c-echo__author
 			strong.c-echo__name = audio.title
 			span.c-echo__job = audio.subtitle
-
-/ section.l-section.l-section--concept (id="concept")
-/ 	.container
-/ 		.c-text.c-text--big
-/ 			p
-/ 				| Je regarde tes yeux, ça me fait pleurer. Ne fais pas cette tête, je ne veux pas te blesser. Je t'aime tant, je t'aime tant.
-
-/ 			p
-/ 				| Aujourd'hui je pars, je reviendrais demain. C'est pas toi et moi, toi et moi ça ne fait qu'un. Je t'aime tant, je t'aime tant.
-

@@ -1,0 +1,44 @@
+.cursor {
+  background-color: $color-red;
+  border-radius: 50%;
+  height: rem(20px);
+  left: var(--mouse-x);
+  pointer-events: none;
+  position: fixed;
+  top: var(--mouse-y);
+  transform: translate(-50%, -50%) scale(1);
+  width: rem(20px);
+  z-index: 10;
+  transition: opacity 0.25s, transform 0.25s;
+
+  &.is-hovering {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  &.is-a-rogue {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.cursor__tick {
+  background: $color-red;
+  border-radius: 50%;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  .is-ticking & {
+    animation: tick 0.5s;
+  }
+}
+
+@keyframes tick {
+  to {
+    opacity: 0;
+    transform: scale(5);
+  }
+}

@@ -1,0 +1,192 @@
+$starwars-perspective: 500px;
+$starwars-perspective-rotation: 25deg;
+
+.c-starwars {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: calc(100vh - var(--vh-offset));
+  padding-bottom: rem(125px);
+  position: relative;
+
+  &.is-initialized {
+    display: block;
+    height: 100vh;
+    height: calc(100vh - var(--vh-offset));
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  @include mq($until: large) {
+    padding-top: rem(125px);
+  }
+
+  @include mq($from: large) {
+    // padding-top: rem(175px);
+  }
+}
+
+  .c-starwars__inner {
+    height: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 20px, black 170px);
+
+    .c-starwars:not(.is-initialized) & {
+      display: flex;
+      align-items: center;
+      overflow: visible;
+      mask-image: none;
+    }
+  }
+
+  .c-starwars__sunset {
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: -1;
+
+    &::before {
+      content: "";
+      background: $color-sunset;
+      border-radius: 100%;
+      display: block;
+      padding-bottom: 100%;
+      position: absolute;
+      width: 100%;
+      transform: translate(0, -50%);
+
+    }
+
+    @media only screen and (orientation: landscape) {
+      width: 125vh;
+    }
+
+    @media only screen and (orientation: portrait) {
+      width: 125vw;
+    }
+  }
+
+  .is-initialized .c-starwars__perspective {
+    height: 100%;
+    position: relative;
+    transform: perspective($starwars-perspective) translateY(-$starwars-perspective/2) rotateX($starwars-perspective-rotation);
+    transform-style: preserve-3d;
+  }
+
+  .c-starwars__list {
+    text-align: center;
+
+    .is-initialized & {
+      left: 0;
+      padding: 0;
+      position: absolute;
+      top: 100%;
+      transform-style: preserve-3d;
+      width: 100%;
+
+      &.no-transition {
+        transition: none;
+      }
+    }
+  }
+
+    .is-initialized .c-starwars__group {
+      padding-bottom: calc(50vh);
+      backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
+      transform-style: preserve-3d;
+    }
+
+    .c-starwars__item {
+      padding: rem(20px);
+
+      @include mq($from: large) {
+        padding: rem(50px) rem(25px);
+      }
+
+      .is-initialized & {
+        transform-style: preserve-3d;
+      }
+    }
+
+      .c-starwars__link {
+        display: block;
+        position: relative;
+        transition: opacity 150ms;
+
+        .is-initialized & {
+          transform-style: preserve-3d;
+          transform: translate3d(0, 0, 0) rotateX(-$starwars-perspective-rotation);
+          transform-origin: 0 100%;
+        }
+
+        @include mq($from: large) {
+          &:hover, &:focus {
+            color: $color-salmon;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .c-starwars__portrait {
+        border-radius: 50%;
+        left: 50%;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+        z-index: -1;
+        transition: opacity 0.25s, visibility 0.25s;
+
+        @include mq($from: large) {
+          .c-starwars__link:hover &, .c-starwars__link:focus & {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+
+      .c-starwars__name {
+        font-family: $font-secondary;
+        @include font-size(20px, 20px);
+        font-weight: $font-bold;
+        position: relative;
+        text-transform: uppercase;
+
+        @include mq($until: large) {
+          padding-top: 0.5em;
+        }
+
+        @include mq($from: large) {
+          font-size: rem(30px);
+        }
+      }
+
+        .c-starwars__number {
+          color: $color-red;
+          display: inline-block;
+          font-size: em(14px, 30px);
+          line-height: (14 / 20);
+          transform: rotate(-15deg) translateY(-0.7em);
+
+          @include mq($until: large) {
+            left: 50%;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%) rotate(-15deg) translateY(-0.7em);
+          }
+        }
+
+      .c-starwars__job {
+        font-family: $font-secondary;
+        @include font-size(14px, 18px);
+        text-transform: uppercase;
+
+        @include mq($from: large) {
+          font-size: rem(20px);
+        }
+      }

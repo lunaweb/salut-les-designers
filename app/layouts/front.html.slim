@@ -5,13 +5,21 @@ html(lang="fr" class="no-js")
     = render :partial => "layouts/front/head"
 
   body(class=body_class id="top")
-    header.header(id="header")
-      = render :partial => "layouts/front/header"
-    / nav.nav(id="nav")
-    /   = render :partial => "layouts/front/nav"
-    main.main(id="main")
-      = yield
-    footer.footer(id="footer")
-      = render :partial => "layouts/front/footer"
+
+    .l-wrapper
+
+      header.header(id="header" )
+        = render :partial => "layouts/front/header"
+
+      nav.nav(id="nav")
+        = render :partial => "layouts/front/nav"
+
+      main.main(id="main")
+        = yield
+
+      footer.footer(id="footer")
+        = render :partial => "layouts/front/footer"
+
+    #turbolinks-permanent(data-turbolinks-permanent="")
 
     = render :partial => "layouts/front/foot"

@@ -31,14 +31,17 @@
     &:hover, &:focus {
       text-decoration: none;
 
-      &::after { background: #fff; }
+      &::after {
+        background: #fff;
+        border-color: #fff;
+      }
     }
   }
 
     .nav__link--left {
       left: rem(15px);
 
-      &:hover, &:focus {
+      &:hover, &:focus, &.nav__link--active {
         transform: rotate(-15deg);
       }
     }
@@ -46,7 +49,14 @@
     .nav__link--right {
       right: rem(15px);
 
-      &:hover, &:focus {
+      &:hover, &:focus, &.nav__link--active {
         transform: rotate(15deg);
+      }
+    }
+
+    .nav__link--active {
+      &::after {
+        background: $color-red;
+        border-color: $color-red;
       }
     }

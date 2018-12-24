@@ -1,8 +1,10 @@
-span.footer__label S'abonner :
 ul.footer__list
   - if(dato.config.soundcloud_url)
     li.footer__item
       a.footer__link (href=dato.config.soundcloud_url target="_blank") Soundcloud
+  - if(dato.config.spotify_url)
+    li.footer__item
+      a.footer__link (href=dato.config.spotify_url target="_blank") Spotify
   - if(dato.config.itunes_url)
     li.footer__item
       a.footer__link (href=dato.config.itunes_url target="_blank") iTunes

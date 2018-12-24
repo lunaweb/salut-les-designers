@@ -1,0 +1,124 @@
+.c-episode {
+  background: $color-sunset;
+  min-height: 100vh;
+  padding-bottom: rem(190px);
+}
+
+  .c-episode__head {
+    font-family: $font-secondary;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include mq($until: medium) {
+      padding-top: rem(120px);
+    }
+  }
+
+    .c-episode__title {
+      font-weight: $font-bold;
+      line-height: (54 / 60);
+
+      @include mq($from: large) {
+        font-size: rem(60px);
+      }
+    }
+
+    .c-episode__subtitle {
+      font-size: rem(14px);
+      line-height: (44 / 40);
+      margin-top: rem(10px);
+
+      @include mq($from: medium) {
+        font-size: rem(27px);
+      }
+
+      @include mq($from: large) {
+        font-size: rem(40px);
+      }
+    }
+
+    .c-episode__number {
+      color: $color-red;
+      @include font-size(40px, 40px);
+      font-weight: $font-bold;
+      margin: rem(50px) 0;
+      transform: rotate(-15deg);
+    }
+
+  .c-episode__body {
+    background: $color-salmon;
+    color: $color-red;
+    margin: 0 auto;
+    padding: rem(75px) rem(10px) rem(120px);
+    position: relative;
+    max-width: rem(855px);
+
+    @include mq($from: large) {
+      padding: rem(90px) rem(40px) rem(150px);
+    }
+  }
+
+    .c-episode__sound {
+      margin-top: rem(60px);
+
+      @include mq($from: 1020px) {
+        margin: rem(100px) rem(-100px) 0;
+      }
+    }
+
+  .c-episode__pager {
+    font-weight: $font-bold;
+    margin-top: rem(100px);
+    text-align: center;
+    text-decoration: underline;
+
+    @include mq($from: large) {
+      font-size: rem(30px);
+    }
+  }
+
+.c-episode.animate-pending {
+  .c-episode__title,
+  .c-episode__subtitle,
+  .c-episode__number,
+  .c-episode__body,
+  .c-episode__pager {
+    opacity: 0;
+  }
+
+  .c-episode__title {
+    transform: translateY(-200%);
+  }
+}
+
+$rock-duration: 0.1s;
+$rock-delay: 0.15s;
+
+.c-episode.animate-running {
+  .c-episode__title {
+    animation: rock $rock-duration 0s linear forwards;
+
+    & + .c-episode__title { animation-delay: ($rock-duration + $rock-delay); }
+    & + .c-episode__title + .c-episode__title { animation-delay: ($rock-duration + $rock-delay) * 2; }
+    & + .c-episode__title + .c-episode__title + .c-episode__title { animation-delay: ($rock-duration + $rock-delay) * 3; }
+    & + .c-episode__title + .c-episode__title + .c-episode__title + .c-episode__title { animation-delay: ($rock-duration + $rock-delay) * 4; }
+  }
+
+  .c-episode__subtitle,
+  .c-episode__number,
+  .c-episode__body,
+  .c-episode__pager {
+    transition: opacity 0.25s ($rock-duration + $rock-delay) * 5;
+    opacity: 1;
+  }
+}
+
+@keyframes rock {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

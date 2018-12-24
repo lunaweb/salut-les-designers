@@ -1,14 +1,53 @@
 .l-section {
-  &--concept {
-    background: $color-purple;
-    color: $color-salmon;
-  }
-
   @include mq($until: large) {
     padding: rem(124px) 0;
   }
 
   @include mq($from: large) {
     padding: rem(140px) 0;
+  }
+}
+
+  .l-section__table-runner {
+    padding: rem(75px) 0 rem(120px);
+    position: relative;
+
+    &::after {
+      content: "";
+      background: #000;
+      bottom: 0;
+      left: 50%;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: rem(855px);
+      z-index: -1;
+    }
+
+    @include mq($from: large) {
+      padding: rem(90px) 0 rem(137px);
+    }
+  }
+
+  .l-section__link {
+    margin-top: rem(72px);
+    text-align: center;
+  }
+
+/**
+ * VARIANTS
+ */
+
+.l-section--concept {
+  background: $color-purple;
+  color: $color-salmon;
+}
+
+.l-section--team {
+  color: $color-gold;
+
+  .l-section__table-runner::after {
+    background: $color-blue;
   }
 }

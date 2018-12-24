@@ -1,0 +1,36 @@
+---
+layout: front
+episodes: true
+---
+
+= content_for(:seo) do
+  = dato_meta_tags(audio)
+
+section.c-episode
+
+  .container
+
+    .c-episode__head
+      h1.u-visually-hidden = audio.title
+      .c-episode__title (data-fit-to=".c-episode__head") = audio.title
+      .c-episode__subtitle = audio.subtitle
+      .c-episode__number
+        | N° #{audio.number}
+
+    - if audio.description.present? || audio.url.present? || audio.player_url.present?
+      .c-episode__body
+        - if audio.description.present? || audio.url.present?
+          .c-text.c-episode__description
+            - if audio.description.present?
+              = audio.description
+            - if audio.url.present?
+              p
+                a.c-link.c-link--bubble.c-link--external.c-link--red(href=audio.url target="_blank") = "Lire l'interview"
+
+        - if audio.player_url.present?
+          .c-episode__sound
+            iframe.js-cursor-vanish(src=audio.player_url width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay")
+
+    - if prev_audio
+      .c-episode__pager
+        a.c-link.c-link--big (href="/episodes/#{prev_audio.permalink}.html") = "Épisode précédent : #{prev_audio.title}"

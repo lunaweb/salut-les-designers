@@ -1,0 +1,29 @@
+.l-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem(-10px);
+
+  * + & {
+    margin-top: rem(40px);
+  }
+
+  @include mq($from: large) {
+    margin: rem(-50px);
+
+    * + & {
+      margin-top: rem(25px);
+    }
+  }
+}
+
+  .l-grid__item {
+    flex: 0 0 auto;
+    padding: rem(10px);
+    width: 100%;
+
+    @include mq($from: large) {
+      padding: rem(50px);
+      width: calc(100% / 3);
+    }
+  }
+

@@ -8,72 +8,65 @@
 (function(){
   'use strict';
 
-  $(document).ready(function(){
+  // CLASS
+  var Logo = (function(){
+    // Constructor
+    function Logo($element, settings){
+      var _ = this;
 
-    var $logo = $('.js-logo');
+      _.settings = $.extend(true, {
+        momentum: {
+          lagAmount: 50,
+          maxSpeed: 100,
+          frameRate: 20,
+        },
+      }, settings || {});
 
-    if($logo.length){
-      var scrollTop = $(window).scrollTop();
+      _.elements = {
+        $logo: $element,
+      };
 
-      // Momentum
-      var lagAmount = 50;
-      var maxSpeed = 100;
-      var frameRate = 20;
+      _.lastTime = void 0;
+      _.position = 0;
 
-      var logoTop = 0;
-      var lastTime = void 0;
-
-      var updateLogoPosition = function updateLogoPosition(time){
-        if(!lastTime) lastTime = time;
-
-        var delta = time - lastTime;
-
-        if(delta >= frameRate){
-          scrollTop = $(window).scrollTop();
-
-          var move = (scrollTop - logoTop) * delta / (lagAmount + delta);
-          var direction = move === 0 ? 0 : move / Math.abs(move);
-
-          logoTop = logoTop + Math.min(Math.abs(move), maxSpeed) * direction;
-          $logo.css('transform', 'translateY(' + -move + 'px)');
-          lastTime = time;
-        }
-
-        window.requestAnimationFrame(updateLogoPosition);
-      }
-
-      window.requestAnimationFrame(updateLogoPosition);
-
-      // Hero section exclusion
-      var $hero = $('.c-hero');
-
-      if($hero.length){
-        var ticking = false;
-
-        var spyHeroBottom = function spyHeroBottom() {
-          var heroBottom = $hero.position().top + $hero.height();
-
-          if(heroBottom <= scrollTop){
-            $logo.addClass('is-display');
-          } else {
-            $logo.removeClass('is-display');
-          }
-        }
-
-        spyHeroBottom();
-        $(window).on('scroll', function(e) {
-          if (!ticking) {
-            window.requestAnimationFrame(function() {
-              spyHeroBottom();
-              ticking = false;
-            });
-          }
-          ticking = true;
-        });
-      }
-
+      _.init();
     }
 
+    // Methods
+    Logo.prototype.init = function(){
+      var _ = this;
+      // _.elements.$logo.addClass('is-display');
+      window.requestAnimationFrame($.proxy(_.updatePosition, _));
+    }
+
+    Logo.prototype.updatePosition = function(time){
+      var _ = this;
+
+      if(!_.lastTime) _.lastTime = time;
+
+      var delta = time - _.lastTime;
+
+      if(delta >= _.settings.momentum.frameRate){
+        var scrollTop = $(window).scrollTop();
+
+        var move = (scrollTop - _.position) * delta / (_.settings.momentum.lagAmount + delta);
+        var direction = move === 0 ? 0 : move / Math.abs(move);
+
+        _.position = _.position + Math.min(Math.abs(move), _.settings.momentum.maxSpeed) * direction;
+        _.elements.$logo.css('transform', 'translateY(' + -move + 'px)');
+        _.lastTime = time;
+      }
+
+      window.requestAnimationFrame($.proxy(_.updatePosition, _));
+    };
+
+    return Logo;
+  })();
+
+  // SCRIPTS
+  $(document).ready(function(){
+    var $logo = $('.js-logo');
+    if($logo.length && !Front.reduceMotion) new Logo($logo);
   });
 
 })();

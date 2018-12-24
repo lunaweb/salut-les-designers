@@ -50,7 +50,7 @@ $echo-portrait-size: em(60px, $base-font-size);
         animation-timing-function: linear;
         animation-iteration-count: infinite;
 
-        .c-echo:hover &, .c-echo:focus & {
+        .c-echo.is-playing & {
           animation-name: echo-bars;
         }
 
