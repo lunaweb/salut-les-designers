@@ -5,7 +5,7 @@
 /.rsync_cache
 /.sass-cache
 build
-Gemfile.lock
+# Gemfile.lock
 
 ### Node
 
