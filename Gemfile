@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'middleman', '~> 4.2'
+gem 'middleman', github: 'middleman', branch: '4.2-stable', ref: '1dc1611b70ed0d38532b355f88443bbc750cb54b'
 gem 'middleman-livereload'
 gem 'middleman-autoprefixer'
 gem 'middleman-deploy', github: 'middleman-contrib/middleman-deploy', branch: 'master'
