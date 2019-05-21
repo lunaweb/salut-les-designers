@@ -36,16 +36,6 @@ activate :autoprefixer do |config|
   config.browsers = ['last 4 versions', 'Explorer >= 10']
 end
 
-# Deploy
-activate :deploy do |config|
-  branch_name = `git rev-parse --abbrev-ref HEAD`
-  config.build_before  = false
-  config.deploy_method = :rsync
-  config.host          = 'lunaweb@preprod-03.lunaweb.io'
-  config.path          = "/home/prototype/maaf-mars-app-2016/#{branch_name}"
-  config.clean         = true
-end
-
 # Sprockets
 activate :sprockets
 sprockets.append_path File.join(root, "node_modules")
