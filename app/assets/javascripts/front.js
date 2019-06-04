@@ -2,7 +2,6 @@
 // require svg4everybody/svg4everybody.js
 //= require vendors/jquery.ba-throttle-debounce.min.js
 //= require front/vunit-check.js
-//= require turbolinks
 //= require fontfaceobserver/fontfaceobserver.js
 //= require_self
 //= require front/_cursor.js

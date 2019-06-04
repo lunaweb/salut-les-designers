@@ -31,14 +31,6 @@ set :data_dir, "data"
 # Extensions
 ###
 
-# Autoprefixer
-activate :autoprefixer do |config|
-  config.browsers = ['last 4 versions', 'Explorer >= 10']
-end
-
-# Sprockets
-activate :sprockets
-sprockets.append_path File.join(root, "node_modules")
 
 ###
 # Engines
@@ -71,7 +63,5 @@ end
 
 # Build-specific configuration
 configure :build do
-  activate :minify_css
-  activate :minify_javascript
   set :slim, { :pretty => true }
 end
