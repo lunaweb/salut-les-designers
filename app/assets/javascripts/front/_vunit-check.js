@@ -1,7 +1,4 @@
-//= require_self
-
 (function() {
-  'use strict';
 
   $(document).ready(function(){
     var $tmp = $('<div></div>').appendTo($('body'));

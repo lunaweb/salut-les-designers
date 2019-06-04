@@ -1,7 +1,4 @@
-//= require_self
-
 (function(){
-  'use strict';
 
   $(document).ready(function(){
     if (window.CSS && CSS.supports('top', 'var(--mouse-y)') && $('html').hasClass('no-touchevents')) {

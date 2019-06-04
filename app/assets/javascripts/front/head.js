@@ -1,5 +1,4 @@
-//= require front/_modernizr
-//= require_self
+//=require front/_modernizr.js
 
 // IE10 Windows Phone 8 @viewport bug fix
 (function() {

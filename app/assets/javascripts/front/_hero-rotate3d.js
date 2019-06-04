@@ -1,8 +1,6 @@
-//= require intersection-observer/intersection-observer
-//= require_self
+//=require intersection-observer/intersection-observer.js
 
 (function() {
-  'use strict';
 
   // CLASS
   var Hero = (function(){

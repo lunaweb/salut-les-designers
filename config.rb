@@ -27,6 +27,13 @@ set :images_dir, "assets/images"
 set :fonts_dir, "assets/fonts"
 set :data_dir, "data"
 
+# External pipeline
+activate :external_pipeline,
+  name: :gulp,
+  command: "gulp #{build? ? "build" : "" }",
+  source: ".tmp/build",
+  latency: 0
+
 ###
 # Extensions
 ###
@@ -37,7 +44,7 @@ set :data_dir, "data"
 ###
 
 # Slim
-set :slim, { :pretty => true }
+set :slim, { :pretty => false }
 
 # Dato
 activate :dato
@@ -63,5 +70,8 @@ end
 
 # Build-specific configuration
 configure :build do
-  set :slim, { :pretty => true }
+  # Prevent Middleman from trying to compile Sass files since there are compiled in .tmp/build
+  ignore "assets/**/*.scss"
+
+  activate :asset_hash
 end
