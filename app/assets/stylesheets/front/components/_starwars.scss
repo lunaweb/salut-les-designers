@@ -179,6 +179,10 @@ $starwars-perspective-rotation: 25deg;
             top: 0;
             transform: translateX(-50%) rotate(-15deg) translateY(-0.7em);
           }
+
+          @include mq($from: large) {
+            margin-left: 1em;
+          }
         }
 
       .c-starwars__job {
