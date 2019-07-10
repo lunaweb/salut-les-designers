@@ -1,12 +1,9 @@
-//= require_self
-
 /**
  * LOGO MOMENTUM
  * Based on https://codepen.io/nathantaylor/pen/NvOeQr
  ********************************* */
 
 (function(){
-  'use strict';
 
   // CLASS
   var Logo = (function(){

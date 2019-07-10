@@ -1,8 +1,6 @@
-//= require jquery-mousewheel/jquery.mousewheel.js
-//= require_self
+//=require jquery-mousewheel/jquery.mousewheel.js
 
 (function(){
-  'use strict';
 
   // CLASS
   var StarWars = (function(){

@@ -27,35 +27,24 @@ set :images_dir, "assets/images"
 set :fonts_dir, "assets/fonts"
 set :data_dir, "data"
 
+# External pipeline
+activate :external_pipeline,
+  name: :gulp,
+  command: "gulp #{build? ? "build" : "" }",
+  source: ".tmp/build",
+  latency: 0
+
 ###
 # Extensions
 ###
 
-# Autoprefixer
-activate :autoprefixer do |config|
-  config.browsers = ['last 4 versions', 'Explorer >= 10']
-end
-
-# Deploy
-activate :deploy do |config|
-  branch_name = `git rev-parse --abbrev-ref HEAD`
-  config.build_before  = false
-  config.deploy_method = :rsync
-  config.host          = 'lunaweb@preprod-03.lunaweb.io'
-  config.path          = "/home/prototype/maaf-mars-app-2016/#{branch_name}"
-  config.clean         = true
-end
-
-# Sprockets
-activate :sprockets
-sprockets.append_path File.join(root, "node_modules")
 
 ###
 # Engines
 ###
 
 # Slim
-set :slim, { :pretty => true }
+set :slim, { :pretty => false }
 
 # Dato
 activate :dato
@@ -81,7 +70,8 @@ end
 
 # Build-specific configuration
 configure :build do
-  activate :relative_assets
-  set :relative_links, true
-  set :slim, { :pretty => true }
+  # Prevent Middleman from trying to compile Sass files since there are compiled in .tmp/build
+  ignore "assets/**/*.scss"
+
+  activate :asset_hash
 end

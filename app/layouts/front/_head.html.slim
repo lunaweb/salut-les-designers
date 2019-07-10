@@ -17,13 +17,21 @@ meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
 <meta name="turbolinks-cache-control" content="no-preview">
 
+- if(dato.config.rss_url)
+  link(rel="alternate" type="application/rss+xml" href=dato.config.rss_url title="Salut les Designers !")
+
 /[if IE]
   meta(content="IE=edge" http-equiv="X-UA-Compatible")
   meta(content="no" http-equiv="imagetoolbar")
   meta(content="true" name="MSSmartTagsPreventParsing")
 
-= stylesheet_link_tag :front, :media => :screen
-= stylesheet_link_tag :print, :media => :print
+= stylesheet_link_tag 'front', :media => :screen
+/ = stylesheet_link_tag :print, :media => :print
 = content_for :page_styles
 
 = javascript_include_tag "front/head"
+
+/ Set in the head instead of the body because of Turbolinks : https://github.com/BrowserSync/browser-sync/wiki/Browsersync-for-Turbolinks
+- if config[:environment] == :development
+  javascript:
+    document.write("<script async src=\'http://localhost:3001/browser-sync/browser-sync-client.js?v=2.26.5\'><\/script>")

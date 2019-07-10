@@ -1,7 +1,4 @@
-//= require_self
-
 (function(){
-  'use strict';
 
   // CLASS
   var Looney = (function(){
