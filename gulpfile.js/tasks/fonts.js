@@ -1,12 +1,29 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
-var config      = require('../config').fonts;
+/**
+ * REQUIREMENTS
+ */
+const { src, dest, watch } = require('gulp');
+
+const config               = require('../config').fonts;
+const browsersync          = require('../browsersync').server;
 
 if (!config) return;
 
+/**
+ * TASKS
+ */
+
 // Simply copy fonts
-gulp.task('fonts', function() {
-  return gulp.src(config.src)
-    .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.stream());
-});
+const fonts = () => {
+  return src(config.src)
+    .pipe(dest(config.dest))
+    .pipe(browsersync.stream());
+};
+
+// Watch fonts updates
+const watchFiles = () => watch(config.src, fonts);
+
+/**
+ * EXPORTS
+ */
+exports.default = fonts;
+exports.watch   = watchFiles;

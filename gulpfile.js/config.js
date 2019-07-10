@@ -11,7 +11,7 @@ var config = {
 // CLEAN
 config.clean = {
   src: [
-    `${tmp}/**`,
+    `${tmp}`,
   ]
 };
 
@@ -27,11 +27,8 @@ config.stylesheets =  {
   dest: publicAssets + '/stylesheets',
   sass: {
     includePaths: [nodeModules],
-    outputStyle: 'compressed'
+    outputStyle: 'compressed',
   },
-  autoprefixer: {
-    browsers: ['last 2 versions', 'ie >= 10']
-  }
 };
 
 // JAVASCRIPTS
@@ -44,9 +41,9 @@ config.javascripts = {
   },
   minify: {
     ext: {
-      min: '.js'
-    }
-  }
+      min: '.js',
+    },
+  },
 };
 
 // FONTS
@@ -55,14 +52,22 @@ config.fonts = {
   dest: publicAssets + '/fonts',
 };
 
+// SPRITES
+config.sprites = {
+  src: sourceAssets + '/images/**/sprite*/',
+  src_watch: sourceAssets + '/images/**/sprite*/**/*.svg',
+  dest: publicAssets + '/images',
+};
+
 // BROWSERSYNC
+config.browsersyncName = 'Gulp server';
 config.browsersync = {
   port: 3001,
   logSnippet: false,
   open: false,
   socket: {
-    domain: 'localhost:3001'
-  }
+    domain: 'localhost:3001',
+  },
 };
 
 // DELIVER
@@ -73,13 +78,13 @@ config.deliver = {
     src_build: ['./build/**'],
     src_sources: './app/assets/**/*',
     dest_build: `${tmpDeliver}/build`,
-    dest_sources: `${tmpDeliver}/sources`
+    dest_sources: `${tmpDeliver}/sources`,
   },
   zip: {
     prefix: 'livrable-',
     src: `${tmpDeliver}/**`,
-    dest: './livrables'
-  }
+    dest: './livrables',
+  },
 };
 
 // Export

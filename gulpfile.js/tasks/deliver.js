@@ -1,109 +1,133 @@
-var gulp        = require('gulp');
-var replace     = require('gulp-replace');
-var zip         = require('gulp-zip');
-var fs          = require('fs');
-var merge       = require('merge-stream');
-var moment      = require('moment');
-var runSequence = require('run-sequence');
-var config      = require('../config').deliver;
+/**
+ * REQUIREMENTS
+ */
+const { src, dest, series, parallel } = require('gulp');
+
+const fs                              = require('fs');
+const merge                           = require('merge-stream');
+const moment                          = require('moment');
+const replace                         = require('gulp-replace');
+const zip                             = require('gulp-zip');
+
+const config                          = require('../config').deliver;
 
 if (!config) return;
 
+const build = require('./build.js').default;
+
 /**
- *  Prepare a zip for delivering code to the client
- *   - Build assets (defined in build.js)
- *   - Gather resources in a folder
- *   - Zip it
+ * TASKS
  */
-gulp.task('deliver', function(callback){
-  return runSequence(
-    'build',
-    'deliver:copy',
-    'deliver:zip',
-    callback
-  );
-});
+
+/**
+ * Copy assets sources
+ *
+ * This is a tricky task cause we need to detect all node_modules included in assets sources
+ * and change there references to `vendor/{node_modules}` so all the resources are welled
+ * delivered to the client.
+ */
 
   /**
-   *  Main copy task
-   *   - copy build folder
-   *   - copy assets sources
+   * Node modules which are used as assets vendors
+   * { directory: [node_module, ...], ... }
    */
-  gulp.task('deliver:copy', ['deliver:copy:build', 'deliver:copy:sources']);
+  let node_modules_vendors = {};
+  // Populate node_modules_vendors
+  const addNodeModuleRef = (directory, node_module) => {
+    if (typeof node_modules_vendors[directory] === 'undefined') {
+      node_modules_vendors[directory] = [node_module];
+    } else if (node_modules_vendors[directory].indexOf(node_module) === -1) {
+      node_modules_vendors[directory].push(node_module);
+    }
+  };
 
-    // Copy build folder
-    gulp.task('deliver:copy:build', function() {
-      return gulp.src(config.copy.src_build)
-        .pipe(gulp.dest(config.copy.dest_build));
-    });
+  /**
+   * Prevent characters from a string to conflict with regex rules
+   * Taken from lodash's escapeRegExp() : https://github.com/lodash/lodash/blob/4.17.11/lodash.js
+   */
+  const escapeRegExString = (string) => string.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
 
-    /**
-     * Copy assets sources
-     *
-     * This is a tricky task cause we need to detect all node_modules included in assets sources
-     * and change there references to `vendor/{node_modules}` so all the resources are welled
-     * delivered to the client.
-     */
-    gulp.task('deliver:copy:sources', function(callback){
-      return runSequence(
-        'deliver:copy:sources:original',
-        'deliver:copy:sources:node_modules',
-        callback
-      );
-    });
+  // Get dependencies listed in package.json
+  let dependencies = Object.keys(JSON.parse(fs.readFileSync('./package.json'))['dependencies']) || [];
+  // Escape them
+  let escapeDependencies = dependencies.map(string => escapeRegExString(string));
+  // Create reg ex that will match node_modules references in assets sources
+  const vendorRegExp = new RegExp('(' + escapeDependencies.join('|') + ')\/', 'gm');
 
-      /**
-       * Node modules which are used as assets vendors
-       * { directory: [node_module, ...], ... }
-       */
-      var node_modules_vendors = {};
-      // Populate node_modules_vendors
-      var addNodeModuleRef = function(directory, node_module){
-        if(typeof node_modules_vendors[directory] === 'undefined')
-          node_modules_vendors[directory] = [node_module];
-        else if(node_modules_vendors[directory].indexOf(node_module) === -1)
-          node_modules_vendors[directory].push(node_module);
-      }
+  // Copy assets sources as they are, but replace node_modules references by `vendors/{node_module}`
+  const copyOriginalSources = () => {
+    return src(config.copy.src_sources)
+      .pipe(replace(vendorRegExp, function(match, p1) {
+        const splitPath = this.file.relative.split("/");
 
-      /**
-       * Prevent characters from a string to conflict with regex rules
-       * Taken from lodash's escapeRegExp() : https://github.com/lodash/lodash/blob/4.17.11/lodash.js
-       */
-      var escapeRegExString = function(string){ return string.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&'); };
+        addNodeModuleRef(splitPath[0], p1);
 
-      // Get dependencies listed in package.json
-      var dependencies = Object.keys(JSON.parse(fs.readFileSync('./package.json'))['dependencies']) || [];
-      // Escape them
-      var escapeDependencies = dependencies.map(function(string){ return escapeRegExString(string); });
-      // Create reg ex that will match node_modules references in assets sources
-      var vendorRegExp = new RegExp('(' + escapeDependencies.join('|') + ')\/', 'gm');
+        return 'vendors/' + match;
+      }, { skipBinary: true }))
+      .pipe(dest(config.copy.dest_sources));
+  };
 
-      // Copy assets sources as they are, but replace node_modules references by `vendors/{node_module}`
-      gulp.task('deliver:copy:sources:original', function(){
-        return gulp.src(config.copy.src_sources)
-          .pipe(replace(vendorRegExp, function(match, p1){
-            var splitPath = this.file.relative.split("/");
+  // Copy all node_modules referenced in `node_modules_vendors`
+  const copyNodeModules = () => {
+    return merge(
+      Object.keys(node_modules_vendors).map(key => {
+        return src('./node_modules/{' + node_modules_vendors[key].join(',') + '}/**/*')
+          .pipe(dest(config.copy.dest_sources + '/' + key + '/vendors'));
+      })
+    );
+  };
 
-            addNodeModuleRef(splitPath[0], p1);
+  // Copy build folder
+  const copyBuild = () => {
+    return src(config.copy.src_build)
+      .pipe(dest(config.copy.dest_build));
+  };
 
-            return 'vendors/' + match;
-          }, {skipBinary: true}))
-          .pipe(gulp.dest(config.copy.dest_sources))
-      });
+  // Copy assets sources
+  const copySources = series(copyOriginalSources, copyNodeModules);
 
-      // Copy all node_modules referenced in `node_modules_vendors`
-      gulp.task('deliver:copy:sources:node_modules', function(){
-        return merge(
-          Object.keys(node_modules_vendors).map(function(key){
-            return gulp.src('./node_modules/{' + node_modules_vendors[key].join(',') + '}/**/*')
-              .pipe(gulp.dest(config.copy.dest_sources + '/' + key + '/vendors'));
-          })
-        );
-      });
+// Copy styleguide from build directory if configured
+let copyStyleguide;
+if(config.copy.src_styleguide){
+  copyStyleguide = () => {
+    return src(config.copy.src_styleguide)
+      // Replace assets path because in the deliverable we have not the same structure as the build folder
+      .pipe(replace(/"\.\.\/([\/a-zA-Z0-9-_\.#]+)"/g, function(match, p1) {
+        return this.file.relative.indexOf('assets') === 0 ? match : '"' + p1 + '"';
+      }, { skipBinary: true }))
+      .pipe(dest(config.copy.dest_styleguide));
+  };
+}
 
-  // Zip the deliverable files
-  gulp.task('deliver:zip', function() {
-    return gulp.src(config.zip.src)
-      .pipe(zip(config.zip.prefix + moment().format('YYYYMMDD-HHmm') + '.zip'))
-      .pipe(gulp.dest(config.zip.dest));
-  });
+/**
+ * Main copy task
+ *  - copy build folder
+ *  - copy assets sources
+ *  - if configured, copy styleguide
+ */
+let copyTasks = [copyBuild, copySources];
+if (copyStyleguide) {
+  copyTasks.push(copyStyleguide);
+}
+
+const copyFiles = parallel(...copyTasks);
+
+// Zip the deliverable files
+const zipFiles = () => {
+  return src(config.zip.src)
+    .pipe(zip(config.zip.prefix + moment().format('YYYYMMDD-HHmm') + '.zip'))
+    .pipe(dest(config.zip.dest));
+};
+
+/**
+ * Prepare a zip for delivering code to the client
+ *  - Build assets (defined in build.js)
+ *  - Gather resources in a folder
+ *  - Zip it
+ */
+const deliver = series(build, copyFiles, zipFiles);
+
+/**
+ * EXPORTS
+ */
+exports.default = deliver;

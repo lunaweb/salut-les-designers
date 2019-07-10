@@ -1,10 +1,20 @@
-var gulp   = require('gulp');
-var del    = require('del');
-var config = require('../config').clean;
+/**
+ * REQUIREMENTS
+ */
+const del    = require('del');
+
+const config = require('../config').clean;
 
 if (!config) return;
 
-// Delete wanted files
-gulp.task('clean', function() {
-  return del(config.src);
-});
+/**
+ * TASKS
+ */
+
+// Delete files
+const clean = () => del(config.src);
+
+/**
+ * EXPORTS
+ */
+exports.default = clean;

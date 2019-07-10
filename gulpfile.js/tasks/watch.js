@@ -1,17 +1,40 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
-var watch       = require('gulp-watch');
-var config      = require('../config');
+/**
+ * REQUIREMENTS
+ */
+const { watch, series, parallel } = require('gulp');
 
-if (!config) return;
+const config                      = require('../config');
+const browsersync                 = require('../browsersync');
 
-// Watch modifications to live reloading browsers with browsersync
-gulp.task('watch', function() {
-  browserSync.init(config.browsersync);
+if(!config) return;
 
-  watch(config.images.src, function(){ gulp.start('images') });
-  watch(config.stylesheets.src, function(){ gulp.start('stylesheets') });
-  watch(config.javascripts.src_watch, function(){ gulp.start('javascripts') });
-  watch(config.fonts.src, function(){ gulp.start('fonts') });
-  watch('./**/*.slim').on('change', browserSync.reload);
-});
+const fonts       = require('./fonts').watch;
+const images      = require('./images').watch;
+const javascripts = require('./javascripts').watch;
+const sprites     = require('./sprites').watch;
+const styleguide  = require('./styleguide').watch;
+const stylesheets = require('./stylesheets').watch;
+
+/**
+ * TASKS
+ */
+
+// Execute watch tasks defined
+const watchFiles = () => {
+  fonts();
+  images();
+  javascripts();
+  sprites();
+  stylesheets();
+
+  if(styleguide){
+    styleguide();
+  }
+
+  watch('./**/*.slim', browsersync.reload);
+}
+
+/**
+ * EXPORTS
+ */
+exports.default = parallel(browsersync.serve, watchFiles);

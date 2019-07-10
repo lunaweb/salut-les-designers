@@ -1,18 +1,34 @@
-var gulp        = require('gulp');
-var plumber     = require('gulp-plumber');
-var changed     = require('gulp-changed');
-var imagemin    = require('gulp-imagemin');
-var browserSync = require('browser-sync');
-var config      = require('../config').images;
+/**
+ * REQUIREMENTS
+ */
+const { src, dest, watch } = require('gulp');
+
+const changed              = require('gulp-changed');
+const imagemin             = require('gulp-imagemin');
+
+const config               = require('../config').images;
+const browsersync          = require('../browsersync').server;
 
 if (!config) return;
 
+/**
+ * TASKS
+ */
+
 // Optimize images
-gulp.task('images', function() {
-  return gulp.src(config.src)
-    .pipe(plumber())
+const images = () => {
+  return src(config.src)
     .pipe(changed(config.dest))
     .pipe(imagemin())
-    .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.stream());
-});
+    .pipe(dest(config.dest))
+    .pipe(browsersync.stream());
+};
+
+// Watch file updates
+const watchFiles = () => watch(config.src, images);
+
+/**
+ * EXPORTS
+ */
+exports.default = images;
+exports.watch   = watchFiles;

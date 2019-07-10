@@ -1,27 +1,40 @@
-var gulp         = require('gulp');
-var plumber      = require('gulp-plumber');
-var sass         = require('gulp-sass');
-var sassGlob     = require('gulp-sass-glob');
-var sourcemaps   = require('gulp-sourcemaps');
-var postcss      = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
-var browserSync  = require('browser-sync');
-var config       = require('../config').stylesheets;
+/**
+ * REQUIREMENTS
+ */
+const { src, dest, watch } = require('gulp');
+
+const autoprefixer         = require('autoprefixer');
+const postcss              = require('gulp-postcss');
+const sass                 = require('gulp-sass');
+const sourcemaps           = require('gulp-sourcemaps');
+
+const config               = require('../config').stylesheets;
+const browsersync          = require('../browsersync').server;
 
 if (!config) return;
 
+/**
+ * TASKS
+ */
+
 // Compile, improve and minify sass files
-gulp.task('stylesheets', function() {
-  return gulp.src(config.src)
-    .pipe(plumber())
+const stylesheets = () => {
+  return src(config.src)
     .pipe(sourcemaps.init())
-    .pipe(sassGlob())
-    .pipe(sass(config.sass))
-    .on('error', sass.logError)
-    .pipe(postcss([
-      autoprefixer(config.autoprefixer)
-    ]))
+      .pipe(sass(config.sass))
+      .pipe(postcss([
+        autoprefixer(config.autoprefixer)
+      ]))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.stream());
-});
+    .pipe(dest(config.dest))
+    .pipe(browsersync.stream());
+};
+
+// Watch file updates
+const watchFiles = () => watch(config.src, stylesheets);
+
+/**
+ * EXPORTS
+ */
+exports.default = stylesheets;
+exports.watch   = watchFiles;
