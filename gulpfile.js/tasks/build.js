@@ -1,24 +1,43 @@
-var gulp        = require('gulp');
-var runSequence = require('run-sequence');
-var config = require('../config');
+/**
+ * REQUIREMENTS
+ */
+const { series, parallel } = require('gulp');
 
-var concurrentTasks = ['images', 'stylesheets', 'javascripts', 'fonts'];
+const config               = require('../config');
 
-// Staging & Production : Rebuild assets
-gulp.task('build', function(callback){
-  return runSequence(
-    'clean',
-    concurrentTasks,
-    callback
-  );
-});
+// Required tasks
+const clean                = require('./clean').default
+const fonts                = require('./fonts').default
+const images               = require('./images').default
+const javascripts          = require('./javascripts').default
+const sprites              = require('./sprites').default
+const stylesheets          = require('./stylesheets').default
+const watch                = require('./watch').default
 
-// Developement : Rebuild assets and watch them
-gulp.task('build-dev', function(callback){
-  return runSequence(
-    'clean',
-    concurrentTasks,
-    'watch',
-    callback
-  );
-});
+// Main tasks that will be run in parallel
+const concurrentTasks = [images, stylesheets, javascripts, fonts, sprites];
+let buildConcurrentTasks = Array.from(concurrentTasks);
+let devConcurrentTasks = Array.from(concurrentTasks);
+
+// If config is setup for a styleguide require it and add tasks
+if (config.styleguide) {
+  const styleguide = require('./styleguide');
+  buildConcurrentTasks.push(styleguide.default);
+  devConcurrentTasks.push(styleguide.dev);
+}
+
+/**
+ * TASKS
+ */
+
+// Build application
+const build = series(clean, parallel(buildConcurrentTasks));
+
+// Build application and watch changes
+const dev = series(clean, parallel(devConcurrentTasks), watch);
+
+/**
+ * EXPORTS
+ */
+exports.default = build;
+exports.dev     = dev;
