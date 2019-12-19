@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/middleman-contrib/middleman-deploy.git
+  remote: https://github.com/middleman-contrib/middleman-deploy.git
   revision: 4d04b550b4c6888265d83ee9689f41e29dbae535
   branch: master
   specs:
@@ -123,7 +123,7 @@ GEM
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
