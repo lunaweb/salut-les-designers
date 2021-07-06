@@ -6,24 +6,24 @@
 var Front = {
   reduceMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
 
-  isMobile: function(){
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  isMobile: function () {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       return true;
     }
 
     return false;
   },
 
-  getPermanentRoot: function(){
+  getPermanentRoot: function () {
     return $('#turbolinks-permanent').length ? $('#turbolinks-permanent') : $('body');
   },
 
-  getInContext: function(search, $context){
+  getInContext: function (search, $context) {
     var $elements;
 
-    if($context === undefined){
+    if ($context === undefined) {
       $elements = $(search);
-    } else if($context.filter(search).length){
+    } else if ($context.filter(search).length) {
       $elements = $context;
     } else {
       $elements = $(search, $context);
@@ -36,8 +36,10 @@ var Front = {
 //=require front/_cursor.js
 //=require front/_logo.js
 //=require front/_hero-rotate3d.js
+//=require front/_subscribe.js
 //=require front/_echo.js
 //=require front/_tale.js
 //=require front/_starwars.js
 //=require front/_episode.js
+//=require front/_stay-tuned.js
 //=require front/_transitions.js

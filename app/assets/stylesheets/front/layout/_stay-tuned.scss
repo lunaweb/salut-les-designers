@@ -1,0 +1,209 @@
+:root {
+  --stay-tuned-offset: 0px;
+}
+
+@include mq-add-breakpoint("stay-tuned-subscribe-inline", 768px);
+@include mq-add-breakpoint("stay-tuned-bar-separate", 1180px);
+
+// BAR
+.stay-tuned {
+  background: $color-white;
+  border-top-left-radius: rem(20px);
+  border-top-right-radius: rem(20px);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-footer;
+
+  @include mq($from: "stay-tuned-bar-separate") {
+    display: flex;
+  }
+}
+
+  // SUBSCRIBE
+  .stay-tuned__subscribe {
+    // display: flex;
+    // flex-wrap: wrap;
+    padding: rem(20px);
+
+    @include mq($from: "stay-tuned-subscribe-inline") {
+      align-items: center;
+      display: flex;
+    }
+  }
+
+    .stay-tuned__subscribe-label {
+      display: flex;
+
+      @include mq($from: "stay-tuned-subscribe-inline") {
+        align-items: center;
+        width: 56%;
+      }
+    }
+
+      .stay-tuned__subscribe-icon {
+        flex: 0 0 auto;
+
+        @include mq($from: "stay-tuned-bar-separate") {
+          height: rem(58px);
+          width: rem(58px);
+        }
+      }
+
+      .stay-tuned__subscribe-text {
+        flex: 1 1 auto;
+
+        @include mq($until: "stay-tuned-subscribe-inline") {
+          margin: 0 0.5rem;
+          padding-top: rem(4px);
+          text-align: center;
+        }
+
+        @include mq($from: "stay-tuned-subscribe-inline") {
+          margin: rem(0 20px);
+        }
+      }
+
+        .stay-tuned__subscribe-more-text {
+          @include mq($until: "stay-tuned-subscribe-inline") {
+            .stay-tuned__subscribe-text:not(.is-open) & {
+              display: none;
+            }
+          }
+        }
+
+      .stay-tuned__subscribe-toggler {
+        background: transparent;
+        border: 0;
+        color: $color-primary;
+        flex: 0 0 auto;
+        padding: 0;
+        height: 24px;
+        margin-top: rem(5px);
+        position: relative;
+        width: 24px;
+        // outline: 1px solid blue;
+
+        &::before,
+        &::after {
+          content: "";
+          border-left: 2px solid currentColor;
+          border-bottom: 2px solid currentColor;
+          display: block;
+          height: 7px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 7px;
+        }
+
+        &::before,
+        &::after {
+          transition: transform 250ms;
+          transform: translate(8px, 7px) rotate(-45deg);
+        }
+
+        &.is-open::before {
+          transform: translate(8px, 5px) rotate(-45deg);
+        }
+
+        &.is-open::after {
+          transform: translate(8px, 12px) rotate(-45deg) scale(-1);
+        }
+
+        @include mq($from: "stay-tuned-subscribe-inline") {
+          display: none;
+        }
+      }
+
+    .stay-tuned__subscribe-form {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      @include mq($until: "stay-tuned-subscribe-inline") {
+        flex-wrap: wrap;
+        margin: rem((20px - 10px) -5px -10px);
+
+        &:not(.is-open) {
+          display: none;
+        }
+      }
+
+      @include mq($from: "stay-tuned-subscribe-inline") {
+        flex: 1 1 auto;
+        margin: rem(-10px -5px);
+      }
+    }
+
+      .stay-tuned__subscribe-input {
+        appearance: none;
+        border: 1px solid $color-primary;
+        border-radius: rem(30px);
+        flex: 1 1 auto;
+        font: inherit;
+        font-weight: $font-bold;
+        height: rem(40px);
+        margin: rem(10px 5px);
+        padding: rem(10px 20px);
+        max-width: rem(400px);
+        transition: box-shadow 250ms;
+
+        &::placeholder {
+          color: inherit;
+          opacity: 0.5;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 rem(2px) $color-primary;
+          outline: 0;
+        }
+      }
+
+      .stay-tuned__subscribe-submit {
+        appearance: none;
+        background: $color-primary;
+        border: 0;
+        border-radius: rem(20px);
+        color: $color-white;
+        flex: 0 0 auto;
+        font: inherit;
+        font-weight: $font-bold;
+        line-height: 1.25;
+        margin: rem(10px 5px);
+        padding: rem(10px 20px);
+
+        &[disabled] {
+          opacity: 0.5;
+        }
+      }
+
+
+  // NETWORK
+  .stay-tuned__network {
+    padding: rem(20px);
+
+    @include mq($until: "stay-tuned-bar-separate") {
+      border-top: 1px solid $color-background;
+    }
+
+    @include mq($from: "stay-tuned-bar-separate") {
+      align-items: center;
+      border-left: 1px solid $color-background;
+      display: flex;
+      flex: 0 0 auto;
+    }
+  }
+
+    .stay-tuned__network-list {
+      display: flex;
+      justify-content: center;
+      margin: rem(-5px);
+    }
+
+      .stay-tuned__network-item {
+        padding: rem(5px);
+      }
+
+        .stay-tuned__network-link {}

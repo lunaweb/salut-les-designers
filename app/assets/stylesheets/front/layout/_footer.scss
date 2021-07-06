@@ -1,82 +1,54 @@
-.footer {
-  backface-visibility: hidden;
-  bottom: rem(30px);
-  left: rem(20px);
-  position: fixed;
-  right: rem(20px);
-  transition: opacity 0.25s, visibility 0.25s;
-  animation: footer-fade-in 1s;
+@include mq-add-breakpoint("footer-foot-separate", 992px);
 
-  &.is-hide {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
 
-  .footer__link {
-    display: inline-block;
-    font-weight: $font-bold;
-    text-decoration: underline;
-    transition: transform 0.25s;
+.footer {}
 
-    &:hover, &:focus {
-      transform: rotate(-15deg);
+  // FOOT
+  .footer__foot {
+    background: $color-red;
+    color: $color-white;
+    display: flex;
+    padding: rem(20px);
+    text-align: center;
+
+    @include mq($until: "footer-foot-separate") {
+      align-items: center;
+      flex-direction: column;
     }
-  }
 
-  .footer__label,
-  .footer__list,
-  .footer__item {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .footer__label {
-    @include mq($until: medium) {
-      display: none;
-    }
-  }
-
-  .footer__list {
-    list-style: none;
-
-    @include mq($until: medium) {
-      display: flex;
+    @include mq($from: "footer-foot-separate") {
       justify-content: space-between;
     }
   }
 
-    .footer__item {
-      @include mq($until: small) {
-        &--contact {
-          display: none;
-        }
+    .footer__credit {}
+
+    .footer__legals {
+      @include mq($until: "footer-foot-separate") {
+        margin-top: rem(20px);
       }
-
-      @include mq($from: medium) {
-        & + & {
-          margin-left: rem(50px);
-        }
-
-        &--contact {
-          margin-left: 0;
-          bottom: 0;
-          position: absolute;
-          right: 0;
-
-          .footer__link {
-            &:hover, &:focus {
-              transform: rotate(15deg);
-            }
-          }
-        }
-      }
-
     }
 
-@keyframes footer-fade-in {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
+      .footer__legals-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: rem(-10px -15px);
+
+        @include mq($until: "footer-foot-separate") {
+          justify-content: center;
+        }
+      }
+
+        .footer__legals-item {
+          padding: rem(10px 15px);
+        }
+
+          .footer__link {
+            font-weight: $font-bold;
+            text-decoration: underline;
+
+            &:hover,
+            &:focus {
+              text-decoration: none;
+            }
+          }

@@ -21,10 +21,10 @@
 @import "front/layout/base",
         "front/layout/header",
         "front/layout/nav",
+        "front/layout/stay-tuned",
         "front/layout/footer",
         "front/layout/section",
-        "front/layout/grid",
-        "front/layout/wrapper";
+        "front/layout/grid";
 
 // Modules
 @import "front/components/echo",
@@ -36,5 +36,6 @@
         "front/components/starwars",
         "front/components/episode",
         "front/components/cursor",
-        "front/components/looney";
+        "front/components/looney",
+        "front/components/consent-modal";
         // "front/components/glitch"

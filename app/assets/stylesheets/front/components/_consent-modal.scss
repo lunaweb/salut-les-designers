@@ -1,0 +1,285 @@
+/*******************************************************************************
+ * Infos
+*******************************************************************************/
+
+/**
+ * Name: Modal
+ * Type: Component
+ * Description: A dialog infowindow instanciate with the help of A11Y-dialog,
+ *  see : https://a11y-dialog.netlify.app/
+**/
+
+/*******************************************************************************
+ * Base styles (A11Y dialog)
+*******************************************************************************/
+
+/**
+ * 1. Make the dialog container, and its child overlay spread across
+ *    the entire window.
+ */
+.c-consent-modal,
+.c-consent-modal__backdrop {
+  position: fixed; /* 1 */
+  top: 0; /* 1 */
+  right: 0; /* 1 */
+  bottom: 0; /* 1 */
+  left: 0; /* 1 */
+  z-index: $z-modal;
+}
+
+/**
+ * 1. Make the dialog container a flex container to easily center the
+ *    dialog.
+ */
+.c-consent-modal {
+  display: flex; /* 1 */
+}
+
+/**
+ * 1. Make sure the dialog container and all its descendants are not
+ *    visible and not focusable when it is hidden.
+ */
+.c-consent-modal[aria-hidden='true'] {
+  // display: none; /* 1 */
+}
+
+/**
+ * 1. Vertically and horizontally center the dialog in the page.
+ * 2. Make sure the dialog sits on top of the overlay.
+ * 3. Make sure the dialog has an opaque background.
+ */
+.c-consent-modal__dialog {
+  position: relative; /* 2 */
+  z-index: $z-modal + 1; /* 2 */
+  margin: auto; /* 1 */
+  background-color: $color-white; /* 3 */
+}
+
+/*******************************************************************************
+ * App styles
+*******************************************************************************/
+
+.c-consent-modal {
+  // padding: rem(48px 0 24px);
+  overflow: auto;
+  text-align: center;
+  transition: opacity 500ms, visibility 500ms;
+
+  &[aria-hidden="true"] {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+  .c-consent-modal__dialog {
+    border-radius: rem(20px);
+    box-shadow: rem(0px 20px 20px) rgba(0, 0, 0, 0.2);
+    width: 90vw;
+    max-width: rem(280px);
+    // padding-top: rem(48px);
+    // padding-bottom: rem(48px);
+    transition: opacity 500ms, transform 500ms;
+
+    [aria-hidden="true"] & {
+      opacity: 0;
+      transform: translateY(100vh);
+    }
+  }
+
+    .c-consent-modal__head {
+      border-bottom: 1px solid $color-salmon;
+      font-size: rem(13px);
+      font-weight: $font-bold;
+      padding: rem(18px);
+      position: relative;
+    }
+
+      .c-consent-modal__countdown {}
+
+        .c-consent-modal__count {}
+
+        .c-consent-modal__left {}
+
+        .c-consent-modal__right {}
+
+      .c-consent-modal__title {
+        color: $color-primary;
+      }
+
+      .c-consent-modal__title--success {
+        color: #34a853;
+      }
+
+      .c-consent-modal__close {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        display: inline-flex;
+        height: rem(18px);
+        justify-content: center;
+        margin-top: rem(-9px);
+        padding: 0;
+        position: absolute;
+        right: rem(10px);
+        top: 50%;
+        width: rem(18px);
+
+        svg {
+          display: block;
+          fill: currentColor;
+          stroke: currentColor;
+          height: rem(10px);
+          width: rem(10px);
+        }
+      }
+
+      .c-consent-modal__countdown {
+        display: flex;
+        height: rem(20px);
+        left: rem(20px);
+        margin-top: rem(-10px);
+        position: absolute;
+        top: 50%;
+        width: rem(20px);
+      }
+
+        .c-consent-modal__countdown-count {
+          align-items: center;
+          bottom: 0;
+          display: flex;
+          font-size: rem(10px);
+          justify-content: center;
+          left: 0;
+          line-height: 1;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        .c-consent-modal__countdown-left,
+        .c-consent-modal__countdown-right {
+          height: 100%;
+          overflow: hidden;
+          width: 50%;
+
+          &::before {
+            content: "";
+            border: 1px solid $color-foreground;
+            display: block;
+            height: 100%;
+            width: 100%;
+            animation: 6s 1 linear forwards;
+          }
+        }
+
+        .c-consent-modal__countdown-left {
+          &::before {
+            border-right: 0;
+            border-top-left-radius: 999px;
+            border-bottom-left-radius: 999px;
+            transform-origin: center right;
+            animation-name: l-rotate;
+          }
+        }
+
+        .c-consent-modal__countdown-right {
+          &::before {
+            border-left: 0;
+            border-top-right-radius: 999px;
+            border-bottom-right-radius: 999px;
+            transform-origin: center left;
+            animation-name: r-rotate;
+          }
+        }
+
+        @keyframes l-rotate {
+          0% { transform: rotate(0deg); }
+          50% { transform: rotate(0deg); }
+          100% { transform: rotate(180deg); }
+        }
+
+        @keyframes r-rotate {
+          0% { transform: rotate(0deg); }
+          50% { transform: rotate(180deg); }
+          100% { transform: rotate(180deg); }
+        }
+
+    .c-consent-modal__body {
+      padding: rem(18px);
+
+      a {
+        font-size: rem(14px);
+        text-decoration: underline;
+      }
+    }
+
+      .c-consent-modal__status {
+        background: rgba(255, 27, 38, 0.05);
+        border-radius: rem(30px);
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        line-height: 1;
+        margin: rem(20px auto);
+        padding: rem(20px);
+        position: relative;
+        max-width: rem(190px);
+      }
+
+        .c-consent-modal__status--pending {
+          background: rgba(255, 27, 38, 0.1);
+        }
+
+        .c-consent-modal__status--success {
+          background: rgba(23, 204, 95, 0.1);
+        }
+
+        .c-consent-modal__status-icon {
+          margin: rem(-5px 10px -5px -5px);
+        }
+
+        .c-consent-modal__optin {
+          display: inline-block;
+          padding-left: rem(35px);
+          position: relative;
+
+          input,
+          label::before,
+          label::after {
+            height: rem(20px);
+            left: 0;
+            margin-top: rem(-10px);
+            position: absolute;
+            top: 50%;
+            width: rem(20px);
+          }
+
+          input {
+            opacity: 0;
+          }
+
+          label {
+            &::before,
+            &::after {
+              content: "";
+              border-radius: rem(5px);
+            }
+
+            &::before {
+              background: $color-white;
+              border: 1px solid $color-primary;
+            }
+
+            &::after {
+              background: $color-primary;
+              transform: scale(0);
+              transition: transform 250ms;
+            }
+          }
+
+          input:checked + label {
+            &::after {
+              transform: scale(0.7);
+            }
+          }
+        }

@@ -6,14 +6,14 @@ $starwars-perspective-rotation: 25deg;
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  min-height: calc(100vh - var(--vh-offset));
+  min-height: calc(100vh - var(--vh-offset) - var(--stay-tuned-offset));
   padding-bottom: rem(125px);
   position: relative;
 
   &.is-initialized {
     display: block;
     height: 100vh;
-    height: calc(100vh - var(--vh-offset));
+    height: calc(100vh - var(--vh-offset) - var(--stay-tuned-offset));
     padding-bottom: 0;
     overflow: hidden;
   }

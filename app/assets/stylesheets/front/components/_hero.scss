@@ -1,7 +1,7 @@
 .c-hero {
   backface-visibility: hidden;
   height: 100vh;
-  height: calc(100vh - var(--vh-offset));
+  height: calc(100vh - var(--vh-offset) - var(--stay-tuned-offset));
   overflow: hidden;
   position: relative;
 
