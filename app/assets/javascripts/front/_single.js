@@ -1,9 +1,9 @@
-(function(){
+(function () {
 
   // CLASS
-  var Episode = (function(){
+  var Single = (function () {
     // Constructor
-    function Episode($element, settings){
+    function Single($element, settings) {
       var _ = this;
 
       _.settings = $.extend(true, {
@@ -12,14 +12,14 @@
 
       _.elements = {};
       _.elements.$root = $element;
-      _.elements.$title = _.elements.$root.find('.c-episode__title');
+      _.elements.$title = _.elements.$root.find('.js-single-title');
       _.elements.$texts = null;
 
       _.init();
     }
 
     // Methods
-    Episode.prototype.init = function(){
+    Single.prototype.init = function () {
       var _ = this;
 
       _.elements.$texts = _.elements.$title;
@@ -28,66 +28,66 @@
       _.fitTexts();
 
       // Duplicate Title
-      for(var i=0; i<4; i++){
+      for (var i = 0; i < 4; i++) {
         var $clone = _.elements.$title.clone();
         _.elements.$title.after($clone);
         _.elements.$texts = _.elements.$texts.add($clone);
       }
 
-      $(window).resize($.throttle(250, function(){
+      $(window).resize($.throttle(250, function () {
         _.fitTexts();
       }));
     };
 
-    Episode.prototype.fitTexts = function(){
+    Single.prototype.fitTexts = function () {
       var _ = this;
 
       _.elements.$texts.css('white-space', 'nowrap');
-      _.elements.$texts.each(function(){
+      _.elements.$texts.each(function () {
         var $text = $(this);
         var $clone = $text.clone().css({ position: 'absolute', top: '-9999px', left: '-9999px', visibility: 'hidden' }).appendTo($text.parent());
         var $reference = $($text.data('fit-to'));
         var referenceWidth = $reference.width();
         var size = parseInt($text.css('font-size'));
 
-        var newSize = size  * (referenceWidth / $clone.width());
+        var newSize = size * (referenceWidth / $clone.width());
         $text.css('font-size', Math.floor(newSize) + 'px');
 
         $clone.remove();
       });
     };
 
-    return Episode;
+    return Single;
   })();
 
   // SCRIPTS
   $(document)
-    .ready(function(){ init(true); })
-    .on('turbolinks:load', function(e){ if(e.originalEvent.data.timing.visitStart) init(); });
+    .ready(function () { init(true); })
+    .on('turbolinks:load', function (e) { if (e.originalEvent.data.timing.visitStart) init(); });
 
-  function init(listenLoad){
-    var $episode = $('.c-episode');
+  function init(listenLoad) {
+    var $single = $('.js-single');
 
-    if($episode.length){
-      var episode = new Episode($episode);
+    if ($single.length) {
+      var single = new Single($single);
 
       // Hide Content
-      if(!Front.reduceMotion){
-        episode.elements.$root.addClass('animate-pending');
+      if (!Front.reduceMotion) {
+        single.elements.$root.addClass('animate-pending');
       }
 
       // Reveal content
-      var font = new FontFaceObserver('Ace', {weight: 600});
+      var font = new FontFaceObserver('Ace', { weight: 600 });
       font.load().then(function () {
-        revealEpisode(episode);
+        revealSingle(single);
       });
     }
   }
 
-  function revealEpisode(episode){
-    episode.fitTexts();
-    if(!Front.reduceMotion){
-      episode.elements.$root.addClass('animate-running');
+  function revealSingle(single) {
+    single.fitTexts();
+    if (!Front.reduceMotion) {
+      single.elements.$root.addClass('animate-running');
     }
   }
 
