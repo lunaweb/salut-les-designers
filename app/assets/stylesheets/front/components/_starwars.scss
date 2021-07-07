@@ -23,7 +23,9 @@ $starwars-perspective-rotation: 25deg;
   }
 
   @include mq($from: large) {
-    // padding-top: rem(175px);
+    &:not(.is-initialized) {
+      padding-top: rem(175px);
+    }
   }
 }
 
