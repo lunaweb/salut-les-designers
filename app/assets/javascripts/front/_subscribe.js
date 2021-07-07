@@ -165,7 +165,7 @@
         .animate({
           Counter: 0
         }, {
-          duration: 6000,
+          duration: 10000,
           easing: 'linear',
           step: function (now) {
             $(this).text(Math.ceil(now));
@@ -183,7 +183,7 @@
 
       _.closeTimeoutID = setTimeout(function () {
         _.modal.hide();
-      }, 6000);
+      }, 10000);
     }
 
     Subscribe.prototype.updateModalContentWithError = function () {
@@ -193,11 +193,11 @@
 
       _.elements.$modalTitle.parent().append(_.elements.$modalCountdown);
       _.elements.$modalCountdown.find('.c-consent-modal__countdown-count')
-        .prop('Counter', 6)
+        .prop('Counter', 10)
         .animate({
           Counter: 0
         }, {
-          duration: 6000,
+          duration: 10000,
           easing: 'linear',
           step: function (now) {
             $(this).text(Math.ceil(now));
@@ -215,7 +215,7 @@
 
       _.closeTimeoutID = setTimeout(function () {
         _.modal.hide();
-      }, 6000);
+      }, 10000);
     }
 
     Subscribe.prototype.sendForm = function () {

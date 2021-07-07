@@ -82,7 +82,7 @@
 
     [aria-hidden="true"] & {
       opacity: 0;
-      transform: translateY(100vh);
+      transform: translateY(100%);
     }
   }
 
@@ -168,7 +168,7 @@
             display: block;
             height: 100%;
             width: 100%;
-            animation: 6s 1 linear forwards;
+            animation: 10s 1 linear forwards;
           }
         }
 
