@@ -161,7 +161,7 @@
 
       _.elements.$modalTitle.parent().append(_.elements.$modalCountdown);
       _.elements.$modalCountdown.find('.c-consent-modal__countdown-count')
-        .prop('Counter', 6)
+        .prop('Counter', 10)
         .animate({
           Counter: 0
         }, {
@@ -175,7 +175,7 @@
       _.elements.$modalContent.html('\
         <p><strong>Merci de votre inscription,</strong> découvrez dès à présent la newsletter du dernier épisode dans votre boite email.</p>\
         <div class="c-consent-modal__status c-consent-modal__status--success">\
-          <img src="/assets/images/front/party.gif" alt="" width="30" height="30" class="c-consent-modal__status-icon"/>\
+          <img src="/assets/images/front/party-popper.gif" alt="" width="30" height="30" class="c-consent-modal__status-icon"/>\
           <strong>C\'est validé</strong>\
         </div>\
         <a href="/donnees-personnelles.html" target="_blank">Vos données sur ce site</a>\
