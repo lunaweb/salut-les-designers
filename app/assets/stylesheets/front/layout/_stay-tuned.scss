@@ -213,4 +213,29 @@
         padding: rem(5px);
       }
 
-        .stay-tuned__network-link {}
+        .stay-tuned__network-link {
+          display: block;
+          position: relative;
+
+          &::before {
+            content: "";
+            border: rem(2px) solid $color-primary;
+            border-radius: 50%;
+            bottom: rem(-5px);
+            left: rem(-5px);
+            opacity: 0;
+            position: absolute;
+            right: rem(-5px);
+            top: rem(-5px);
+            transform: scale(0);
+            transition: opacity 250ms, transform 250ms;
+          }
+
+          &:hover,
+          &:focus {
+            &::before {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
