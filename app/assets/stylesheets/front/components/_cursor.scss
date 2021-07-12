@@ -1,5 +1,5 @@
 .cursor {
-  background-color: $color-red;
+  background-color: $color-foreground;
   border-radius: 50%;
   height: rem(20px);
   left: var(--mouse-x);
@@ -23,7 +23,7 @@
 }
 
 .cursor__tick {
-  background: $color-red;
+  background: $color-foreground;
   border-radius: 50%;
   height: 100%;
   left: 0;
