@@ -1,0 +1,121 @@
+.c-edito {
+  background: $color-sunset;
+  padding-bottom: rem(120px);
+}
+
+  .c-edito__head {
+    font-family: $font-secondary;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include mq($until: medium) {
+      padding-top: rem(120px);
+    }
+  }
+
+    .c-edito__title {
+      font-weight: $font-bold;
+      line-height: (54 / 60);
+
+      @include mq($from: large) {
+        font-size: rem(60px);
+      }
+    }
+
+  .c-edito__body {
+    background: $color-salmon;
+    margin: rem(50px) auto 0;
+    padding: rem(50px) rem(10px) rem(50px);
+    position: relative;
+    max-width: rem(855px);
+
+    @include mq($from: large) {
+      padding: rem(50px);
+    }
+
+    > * + * {
+      margin-top: 1em;
+    }
+
+    h2 {
+      color: $color-primary;
+      font-size: 1.875em;
+    }
+
+    a {
+      color: $color-primary;
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+
+    ul {
+      list-style: disc inside;
+      padding-left: 0.5em;
+    }
+  }
+
+//     .c-edito__sound {
+//       margin-top: rem(60px);
+
+//       @include mq($from: 1020px) {
+//         margin: rem(100px) rem(-100px) 0;
+//       }
+//     }
+
+//   .c-edito__pager {
+//     font-weight: $font-bold;
+//     margin-top: rem(100px);
+//     text-align: center;
+//     text-decoration: underline;
+
+//     @include mq($from: large) {
+//       font-size: rem(30px);
+//     }
+//   }
+
+.c-edito.animate-pending {
+  .c-edito__title,
+  .c-edito__body {
+    opacity: 0;
+  }
+
+  .c-edito__title {
+    transform: translateY(-200%);
+  }
+}
+
+$rock-duration: 0.1s;
+$rock-delay: 0.15s;
+
+.c-edito.animate-running {
+  .c-edito__title {
+    animation: rock $rock-duration 0s linear forwards;
+
+    & + .c-edito__title { animation-delay: ($rock-duration + $rock-delay); }
+    & + .c-edito__title + .c-edito__title { animation-delay: ($rock-duration + $rock-delay) * 2; }
+    & + .c-edito__title + .c-edito__title + .c-edito__title { animation-delay: ($rock-duration + $rock-delay) * 3; }
+    & + .c-edito__title + .c-edito__title + .c-edito__title + .c-edito__title { animation-delay: ($rock-duration + $rock-delay) * 4; }
+  }
+
+  .c-edito__subtitle,
+  .c-edito__number,
+  .c-edito__body,
+  .c-edito__pager {
+    transition: opacity 0.25s ($rock-duration + $rock-delay) * 5;
+    opacity: 1;
+  }
+}
+
+@keyframes rock {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

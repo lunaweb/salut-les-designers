@@ -1,0 +1,16 @@
+---
+layout: front
+---
+
+= content_for(:seo) do
+  = dato_meta_tags(seo)
+
+section.c-edito.js-single
+
+  .container
+
+    .c-edito__head
+      h1.u-visually-hidden = title
+      .c-edito__title.js-single-title(data-fit-to=".c-edito__head") = title
+
+    .c-edito__body = content.html_safe

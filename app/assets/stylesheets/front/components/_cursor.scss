@@ -1,5 +1,5 @@
 .cursor {
-  background-color: $color-red;
+  background-color: $color-foreground;
   border-radius: 50%;
   height: rem(20px);
   left: var(--mouse-x);
@@ -8,7 +8,7 @@
   top: var(--mouse-y);
   transform: translate(-50%, -50%) scale(1);
   width: rem(20px);
-  z-index: 10;
+  z-index: $z-cursor;
   transition: opacity 0.25s, transform 0.25s;
 
   &.is-hovering {
@@ -23,7 +23,7 @@
 }
 
 .cursor__tick {
-  background: $color-red;
+  background: $color-foreground;
   border-radius: 50%;
   height: 100%;
   left: 0;

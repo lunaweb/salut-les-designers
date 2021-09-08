@@ -6,13 +6,13 @@ episodes: true
 = content_for(:seo) do
   = dato_meta_tags(audio)
 
-section.c-episode
+section.c-episode.js-single
 
   .container
 
     .c-episode__head
       h1.u-visually-hidden = audio.title
-      .c-episode__title (data-fit-to=".c-episode__head") = audio.title
+      .c-episode__title.js-single-title(data-fit-to=".c-episode__head") = audio.title
       .c-episode__subtitle = audio.subtitle
       .c-episode__number
         | N° #{audio.number}

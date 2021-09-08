@@ -59,6 +59,12 @@ dato.tap do |dato|
   end
 end
 
+dato.tap do |dato|
+  dato.editos.each_with_index do |edito, i|
+    proxy "/#{edito.permalink}.html", "/templates/edito/view.html", locals: { title: edito.title, content: edito.content, seo: edito.seo }
+  end
+end
+
 ###
 # Environnement-specific confirgurations
 ###

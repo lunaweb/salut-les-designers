@@ -26,6 +26,7 @@ $color-purple: #B4318A;
 $color-gold: #FFAF1F;
 $color-blue: #1388CF;
 $color-sunset: #FF6545;
+$color-white: #FFF;
 
 $color-background: $color-salmon;
 $color-foreground: #181818;
@@ -52,8 +53,12 @@ $base-font-size: 16px;
 $base-line-height: 24px;
 
 // Z-indexes
-$z-header: 2;
+$z-header: 10;
 $z-main: 1;
+$z-modal: 30;
+$z-cursor: 40;
+$z-looney: 35;
+$z-footer: 20;
 
 // Dimensions
 $gutter-size: 20px;

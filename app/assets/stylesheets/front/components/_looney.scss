@@ -5,7 +5,7 @@
   top: 50%;
   transform: translate(-50%, -50%) scale(1.15);
   min-width: 100vw;
-  z-index: 10;
+  z-index: $z-looney;
 
   &::before {
     content: "";
@@ -55,8 +55,11 @@
   }
 }
 
+/**
+ * [1] Use 0.01 instead of 0 because of a safari issue where the animation not performing.
+ */
 @keyframes circle-intro {
-  from { transform: scale(0); }
+  0% { transform: scale(0.01); } // [1]
 }
 
 @keyframes circle-outro {

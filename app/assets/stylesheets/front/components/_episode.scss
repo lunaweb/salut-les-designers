@@ -1,7 +1,7 @@
 .c-episode {
   background: $color-sunset;
   min-height: 100vh;
-  padding-bottom: rem(190px);
+  padding-bottom: rem(120px);
 }
 
   .c-episode__head {
@@ -38,7 +38,7 @@
     }
 
     .c-episode__number {
-      color: $color-red;
+      color: $color-salmon;
       @include font-size(40px, 40px);
       font-weight: $font-bold;
       margin: rem(50px) 0;
