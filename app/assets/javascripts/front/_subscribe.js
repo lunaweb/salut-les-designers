@@ -173,7 +173,7 @@
         });
 
       _.elements.$modalContent.html('\
-        <p><strong>Merci de votre inscription,</strong> découvrez dès à présent la newsletter du dernier épisode dans votre boite email.</p>\
+        <p><strong>Merci de votre inscription,</strong> découvrez le mois prochain la newsletter du nouvel épisode dans votre boite email.</p>\
         <div class="c-consent-modal__status c-consent-modal__status--success">\
           <img src="/assets/images/front/party-popper.gif" alt="" width="30" height="30" class="c-consent-modal__status-icon"/>\
           <strong>C\'est validé</strong>\
