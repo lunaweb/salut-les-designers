@@ -2,21 +2,21 @@ doctype html
 html(lang="fr" class="no-js")
 
   head
-    = render :partial => "layouts/front/head"
+    = partial "layouts/front/head"
 
   body(class=body_class id="top")
 
     header.header(id="header" )
-      = render :partial => "layouts/front/header"
+      = partial "layouts/front/header"
 
     nav.nav(id="nav")
-      = render :partial => "layouts/front/nav"
+      = partial "layouts/front/nav"
 
     main.main(id="main")
       = yield
 
-    = render :partial => "layouts/front/footer"
+    = partial "layouts/front/footer"
 
     #turbolinks-permanent(data-turbolinks-permanent="")
 
-    = render :partial => "layouts/front/foot"
+    = partial "layouts/front/foot"

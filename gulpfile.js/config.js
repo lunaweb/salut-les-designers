@@ -11,7 +11,7 @@ var config = {
 // CLEAN
 config.clean = {
   src: [
-    `${tmp}`,
+    `${publicAssets}`,
   ]
 };
 

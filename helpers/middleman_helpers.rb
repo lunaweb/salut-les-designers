@@ -55,20 +55,20 @@ module MiddlemanHelpers
   # = render :partial => "partials/menu", :locals => {:mylocale => 'deux'}
   # = render :slim, "partials/menu", :locals => {:mylocale => 'trois'}
   # = render :slim, :partial => "partials/menu", :locals => {:mylocale => 'quatre'}
-  def render(engine, data = nil, options = {}, &block)
-    engine, options = nil, engine   if engine.is_a? Hash
-    data, options   = nil, data     if data.is_a? Hash
-    engine, data    = nil, engine   unless data
+  # def render(engine, data = nil, options = {}, locals = {}, &block)
+  #   engine, options = nil, engine   if engine.is_a? Hash
+  #   data, options   = nil, data     if data.is_a? Hash
+  #   engine, data    = nil, engine   unless data
 
-    options[:locals] ||= {}
-    data = options.delete(:partial) if options[:partial]
-    engine ||= :slim
+  #   options[:locals] ||= {}
+  #   data = options.delete(:partial) if options[:partial]
+  #   engine ||= :slim
 
-    data = data.to_s
-    data = data.gsub(%r{/([^/]+)$}, '/_\\1') unless data.match(%r{/_[^/]+$})
+  #   data = data.to_s
+  #   data = data.gsub(%r{/([^/]+)$}, '/_\\1') unless data.match(%r{/_[^/]+$})
 
-    super engine, data, options, &block
-  end
+  #   super engine, data, options, locals, &block
+  # end
 
   private
 
