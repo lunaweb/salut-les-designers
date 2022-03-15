@@ -14,8 +14,9 @@ section.c-episode.js-single
       h1.u-visually-hidden = audio.title
       .c-episode__title.js-single-title(data-fit-to=".c-episode__head") = audio.title
       .c-episode__subtitle = audio.subtitle
-      .c-episode__number
-        | N° #{audio.number}
+      - if audio.number.present?
+        .c-episode__number
+          | N° #{audio.number}
 
     - if audio.description.present? || audio.url.present? || audio.player_url.present?
       .c-episode__body
