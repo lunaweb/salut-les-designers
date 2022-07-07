@@ -33,7 +33,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-zip": "^5.0.0",
     "merge-stream": "^2.0.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   },
   "dependencies": {
     "a11y-dialog": "^7.1.0",
