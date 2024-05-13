@@ -1,0 +1,29 @@
+version: '3'
+
+# Commandes Docker
+#
+#   Se connecter au conteneur Docker
+#   docker exec -ti salutlesdesigners bash
+#
+#   Installation des dépendances
+#   docker exec salutlesdesigners bash -c "cd /var/www/ && bundle install"
+#
+#   Lancement du serveur de développement (WEBrick)
+#   docker exec -ti salutlesdesigners bash -c "cd /var/www/ && rails server -b 0.0.0.0 -p 3000"
+#
+#   Stopper tous les scripts Ruby lancés
+#   docker exec salutlesdesigners bash -c "pkill -f ruby"
+
+services:
+  ruby:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: salutlesdesigners
+    container_name: salutlesdesigners
+    restart: no
+    ports:
+      - 4567:4567
+    volumes:
+      - .:/var/www
+      - ~/.ssh:/root/.ssh
