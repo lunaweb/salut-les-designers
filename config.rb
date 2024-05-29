@@ -30,7 +30,7 @@ set :data_dir, "data"
 # External pipeline
 activate :external_pipeline,
   name: :gulp,
-  command: "npm run #{build? ? "build" : "" }",
+  command: "gulp #{build? ? "build" : "" }",
   source: ".tmp/build",
   latency: 0
 
