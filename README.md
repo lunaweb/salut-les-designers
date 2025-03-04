@@ -11,7 +11,11 @@
     git clone git@github.com:lunaweb/salut-les-designers.git
     cd lunaweb-salut-les-designers
 
-    docker-compose up
+    docker compose up
+
+### Configuration
+
+Ajouter la clé d'API Dato CMS Readonly disponible dans l'[administration](https://salut-les-designers.admin.datocms.com/project_settings/access_tokens/7680/edit) en ajoutant un fichier `.env`.
 
 ### Installation dans Docker
 

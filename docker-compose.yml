@@ -24,6 +24,9 @@ services:
     restart: no
     ports:
       - 4567:4567
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003
     volumes:
       - .:/var/www
       - ~/.ssh:/root/.ssh

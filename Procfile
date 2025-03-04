@@ -1,1 +1,1 @@
-middleman: bundle exec middleman server
+middleman: npm run dev

@@ -34,7 +34,7 @@ if (config.styleguide) {
 const build = series(clean, parallel(buildConcurrentTasks));
 
 // Build application and watch changes
-const dev = series(clean, parallel(devConcurrentTasks), watch);
+const dev = series(parallel(devConcurrentTasks), watch);
 
 /**
  * EXPORTS
