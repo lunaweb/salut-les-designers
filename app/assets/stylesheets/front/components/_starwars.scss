@@ -9,6 +9,7 @@ $starwars-perspective-rotation: 25deg;
   min-height: calc(100vh - var(--vh-offset) - var(--stay-tuned-offset));
   padding-bottom: rem(125px);
   position: relative;
+  overflow-x: clip;
 
   &.is-initialized {
     display: block;
@@ -104,20 +105,49 @@ $starwars-perspective-rotation: 25deg;
 
     .c-starwars__item {
       padding: rem(20px);
+      // max-width: rem(600px);
+      font-size: 50px;
+      animation-range: unset;
+      animation: zstack linear;
+      animation-timeline: view();
+      width:100%;
 
       @include mq($from: large) {
         padding: rem(50px) rem(25px);
       }
 
       .is-initialized & {
-        transform-style: preserve-3d;
       }
+      @media(prefers-reduced-motion: reduce) {
+        @include mq($from: large) {
+          padding: rem(100px) rem(25px);
+        }
+      }
+
+      @media(prefers-reduced-motion: no-preference) {
+        @keyframes zstack {
+          0% {
+            opacity: 1;
+            transform: scale(2) translateY(100%);
+          }
+        80% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 0;
+            transform: scale(0.5) translateY(0%);
+          }
+        }
+      }
+
     }
 
       .c-starwars__link {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         position: relative;
-        transition: opacity 150ms;
+        transition: scale 150ms;
 
         .is-initialized & {
           transform-style: preserve-3d;
@@ -131,6 +161,10 @@ $starwars-perspective-rotation: 25deg;
             text-decoration: none;
           }
         }
+
+        &:hover, &:focus {
+          scale: 1.2;
+        }
       }
 
       .c-starwars__portrait {
@@ -138,59 +172,53 @@ $starwars-perspective-rotation: 25deg;
         left: 50%;
         opacity: 0;
         position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        top: 0%;
+        transform: translate(-50%, -70%);
         visibility: hidden;
         z-index: -1;
         transition: opacity 0.25s, visibility 0.25s;
 
         @include mq($from: large) {
-          .c-starwars__link:hover &, .c-starwars__link:focus & {
-            opacity: 1;
-            visibility: visible;
-          }
+          opacity: 1;
+          visibility: visible;
         }
+      }
+
+      .c-starwars__number {
+        color: $color-salmon;
+        background-color: #A82618;
+        border: solid rem(2px) #fff;
+        border-radius: rem(10px);
+        display: inline-block;
+        font-size: rem(20px);
+        line-height: (14 / 20);
+        transform: rotate(-2deg);
+        padding: 0.4em 0.4em;
       }
 
       .c-starwars__name {
         font-family: $font-secondary;
         @include font-size(20px, 20px);
-        font-weight: $font-bold;
-        position: relative;
-        text-transform: uppercase;
-
-        @include mq($until: large) {
-          padding-top: 0.5em;
+        font-weight: $font-regular;
+        color: #A82618;
+        span {
+          background: rgba(#fff, 1);
+          padding: rem(5px) rem(10px);
+          border-radius: rem(12px);
+          box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 1.2;
         }
-
         @include mq($from: large) {
           font-size: rem(30px);
         }
       }
 
-        .c-starwars__number {
-          color: $color-salmon;
-          display: inline-block;
-          font-size: em(14px, 30px);
-          line-height: (14 / 20);
-          transform: rotate(-15deg) translateY(-0.7em);
-
-          @include mq($until: large) {
-            left: 50%;
-            position: absolute;
-            top: 0;
-            transform: translateX(-50%) rotate(-15deg) translateY(-0.7em);
-          }
-
-          @include mq($from: large) {
-            margin-left: 1em;
-          }
-        }
-
       .c-starwars__job {
         font-family: $font-secondary;
+        margin-top: rem(10px);
         @include font-size(14px, 18px);
-        text-transform: uppercase;
+        color: #fff;
 
         @include mq($from: large) {
           font-size: rem(20px);

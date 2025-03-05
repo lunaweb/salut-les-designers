@@ -56,7 +56,22 @@
 
     .nav__link--active {
       &::after {
-        background: $color-red;
-        border-color: $color-red;
+        // background: $color-red;
+        // border-color: $color-red;
+      }
+    }
+
+    body:has(.c-episode__head) {
+      .nav__link--active {
+        color: #fff;
+        &::after {
+          border-color: #000;
+        }
+        &:hover {
+          &::after {
+            border-color: $color-red;
+            background-color: transparent;
+          }
+        }
       }
     }

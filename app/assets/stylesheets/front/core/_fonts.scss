@@ -3,3 +3,6 @@
 
 @include font-face("Karmilla", "front/karmilla-regular", $font-regular, normal);
 @include font-face("Karmilla", "front/karmilla-bold", $font-bold, normal);
+
+@include font-face("Clashdisplay", "front/clashdisplay-medium", $font-regular, normal);
+@include font-face("Clashdisplay", "front/clashdisplay-bold", $font-bold, normal);

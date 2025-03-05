@@ -14,10 +14,13 @@ section.c-starwars.js-starwars
           - dato.audios.each do |audio|
             .c-starwars__item
               a.c-starwars__link (href="/episodes/#{audio.permalink}.html")
-                img.c-starwars__portrait (src=audio.portrait.url(w: 220, h: 220) alt=audio.title srcset="#{audio.portrait.url(w: 440, h: 440)} 2x")
+                img.c-starwars__portrait (src=audio.portrait.url(w: 120, h: 120) alt=audio.title srcset="#{audio.portrait.url(w: 220, h: 220)} 2x")
+
+                  / - if audio.number.present?
+                  /   .c-starwars__number
+                  /     |Interview #{audio.number} N°
+
                 .c-starwars__name
-                  = audio.title
-                  - if audio.number.present?
-                    .c-starwars__number
-                      | N° #{audio.number}
+                  span
+                    = audio.title
                 .c-starwars__job = audio.subtitle

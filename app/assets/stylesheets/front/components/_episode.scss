@@ -7,26 +7,36 @@
   .c-episode__head {
     font-family: $font-secondary;
     text-align: center;
-    text-transform: uppercase;
-
-    @include mq($until: medium) {
-      padding-top: rem(120px);
+    padding-top: rem(120px);
+    // text-transform: uppercase;
+    @include mq($from: large) {
+      padding-top: rem(160px);
     }
   }
 
     .c-episode__title {
-      font-weight: $font-bold;
-      line-height: (54 / 60);
-
-      @include mq($from: large) {
-        font-size: rem(60px);
+      // font-weight: $font-bold;
+      span {
+        line-height: 1.1;
+        background: rgba(#fff, 1);
+        padding: rem(5px) rem(7px);
+        border-radius: rem(12px);
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        @include mq($from: large) {
+          font-size: rem(60px);
+        }
       }
+
+
     }
 
     .c-episode__subtitle {
       font-size: rem(14px);
       line-height: (44 / 40);
       margin-top: rem(10px);
+      color: #fff;
+      font-weight: $font-regular;
 
       @include mq($from: medium) {
         font-size: rem(27px);
@@ -39,16 +49,28 @@
 
     .c-episode__number {
       color: $color-salmon;
-      @include font-size(40px, 40px);
+      @include font-size(20px);
       font-weight: $font-bold;
-      margin: rem(50px) 0;
       transform: rotate(-15deg);
+      color: $color-salmon;
+      background-color: #A82618;
+      border: solid rem(2px) #fff;
+      border-radius: rem(10px);
+      display: inline-block;
+      line-height: (14 / 20);
+      transform: rotate(-2deg);
+      padding: 0.4em 0.4em;
+      @include mq($from: large) {
+        border: solid rem(3px) #fff;
+        font-size: rem(40px);
+      }
     }
 
   .c-episode__body {
     background: $color-salmon;
     color: $color-red;
-    margin: rem(50px) auto 0;
+    margin: 0 auto;
+    margin-top: rem(50px);
     padding: rem(75px) rem(10px) rem(120px);
     position: relative;
     max-width: rem(855px);
@@ -71,6 +93,7 @@
     margin-top: rem(100px);
     text-align: center;
     text-decoration: underline;
+    color: #fff;
 
     @include mq($from: large) {
       font-size: rem(30px);

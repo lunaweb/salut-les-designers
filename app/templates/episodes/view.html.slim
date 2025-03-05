@@ -12,11 +12,12 @@ section.c-episode.js-single
 
     .c-episode__head
       h1.u-visually-hidden = audio.title
-      .c-episode__title.js-single-title(data-fit-to=".c-episode__head") = audio.title
-      .c-episode__subtitle = audio.subtitle
       - if audio.number.present?
-        .c-episode__number
-          | N° #{audio.number}
+      / .c-episode__number
+      /   | N° #{audio.number}
+      .c-episode__title(data-fit-to=".c-episode__head")
+        span = audio.title
+      .c-episode__subtitle = audio.subtitle
 
     - if audio.description.present? || audio.url.present? || audio.player_url.present?
       .c-episode__body
