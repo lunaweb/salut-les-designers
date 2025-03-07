@@ -6,10 +6,10 @@
   .c-edito__head {
     font-family: $font-secondary;
     text-align: center;
-    text-transform: uppercase;
-
-    @include mq($until: medium) {
-      padding-top: rem(120px);
+    padding-top: rem(120px);
+    // text-transform: uppercase;
+    @include mq($from: large) {
+      padding-top: rem(160px);
     }
   }
 
@@ -19,6 +19,18 @@
 
       @include mq($from: large) {
         font-size: rem(60px);
+      }
+
+      span {
+        line-height: 1.1;
+        background: rgba(#fff, 1);
+        padding: rem(5px) rem(7px);
+        border-radius: rem(12px);
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        @include mq($from: large) {
+          font-size: rem(60px);
+        }
       }
     }
 
