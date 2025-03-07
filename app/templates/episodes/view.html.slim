@@ -13,11 +13,14 @@ section.c-episode.js-single
     .c-episode__head
       h1.u-visually-hidden = audio.title
       - if audio.number.present?
-      / .c-episode__number
-      /   | N° #{audio.number}
-      .c-episode__title(data-fit-to=".c-episode__head")
-        span = audio.title
-      .c-episode__subtitle = audio.subtitle
+      .c-episode__number
+        - text = audio.subtitle == "Capsule design" ? audio.subtitle : "Interview"
+        span #{text}
+        |  N°#{audio.number}
+      hgroup
+        h2.c-episode__title(data-fit-to=".c-episode__head")
+          span = audio.title
+        p.c-episode__subtitle = audio.subtitle =="Capsule design" ? "" : audio.subtitle
 
     - if audio.description.present? || audio.url.present? || audio.player_url.present?
       .c-episode__body
@@ -31,7 +34,7 @@ section.c-episode.js-single
 
         - if audio.player_url.present?
           .c-episode__sound
-            iframe.js-cursor-vanish(src=audio.player_url width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay")
+            iframe.js-cursor-vanish(src=audio.player_url width="100%" height="166" scrolling="no" frameborder="no" title="Soundcloud : #{audio.subtitle} - #{audio.title}" allow="autoplay")
 
     - if prev_audio
       .c-episode__pager

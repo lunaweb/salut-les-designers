@@ -64,6 +64,9 @@
         border: solid rem(3px) #fff;
         font-size: rem(40px);
       }
+      span {
+        font-weight: $font-regular;
+      }
     }
 
   .c-episode__body {

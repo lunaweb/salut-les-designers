@@ -3,12 +3,12 @@
   / SUBSCRIBE
   .stay-tuned__subscribe.js-subscribe
     .stay-tuned__subscribe-label
-      img.stay-tuned__subscribe-icon(src="/assets/images/front/waving-hand.gif" width="30" height="30" alt="")
+      img.stay-tuned__subscribe-icon(src="/assets/images/front/waving-hand.gif" width="30" height="30" alt="" aria-hidden="true")
       p.stay-tuned__subscribe-text.js-subscribe-text Recevez <strong>directement</strong> par <strong>e-mail</strong> les <strong>informations clés</strong> <span class="stay-tuned__subscribe-more-text">de chaque épisode pour ne rien rater de <strong>l’expertise de nos invités !</strong></span>
-      button.stay-tuned__subscribe-toggler.js-subscribe-toggler
+      button.stay-tuned__subscribe-toggler.js-subscribe-toggler(aria-controls="souscription")
         span.u-visually-hidden Ouvrir/fermer le formulaire de souscription
     / form(class="js-cm-form stay-tuned__subscribe-form js-subscribe-form" id="subForm" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="191722FC90141D02184CB1B62AB3DC2656EA74674AD7458412C857A702D0C2D39AA363E01112C2153C3E3909BD51469FF3A667DC5190537A3B379BA57CA749D1" placeholder="Votre adresse e-mail")
-    form(action="https://emailing.lunaweb.fr/t/y/s/yudjhry/" method="post" class="stay-tuned__subscribe-form js-subscribe-form js-cm-form")
+    form(action="https://emailing.lunaweb.fr/t/y/s/yudjhry/" method="post" class="stay-tuned__subscribe-form js-subscribe-form js-cm-form" id="souscription" tabindex="-1")
       input(autocomplete="Email" aria-label="Adresse électronique" class="js-cm-email-input qa-input-email stay-tuned__subscribe-input" id="fieldEmail" maxlength="200" name="cm-yudjhry-yudjhry" placeholder="Adresse électronique" required="" type="email")
       div(id="modal-subscribe" aria-labelledby="modal-subscribe-title" aria-hidden="true" class="c-consent-modal js-subscribe-modal")
         div(data-a11y-dialog-hide class="c-consent-modal__backdrop")
@@ -28,25 +28,25 @@
       - if(dato.config.soundcloud_url != "")
         li.stay-tuned__network-item
           a.stay-tuned__network-link(href=dato.config.soundcloud_url title="Notre podcast sur Soundcloud")
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40")
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true")
               circle(cx="20" cy="20" r="20" fill="#F50")
               path(d="M6.311 21.264c-.057 0-.103.045-.11.11L6 22.928l.201 1.528c.008.065.053.11.11.11s.102-.045.11-.109l.24-1.529-.24-1.554c-.008-.065-.054-.11-.11-.11zM7.441 20.409c-.01-.067-.058-.113-.118-.113-.06 0-.11.047-.119.113l-.28 2.512.28 2.457c.008.066.058.113.119.113.059 0 .108-.046.118-.113l.32-2.458-.32-2.511zM11.797 18.095a.215.215 0 00-.209.208l-.217 4.614.217 2.981a.215.215 0 00.21.209c.11 0 .202-.093.209-.209v.001l.245-2.982-.245-4.614a.215.215 0 00-.21-.209zM9.548 19.68a.172.172 0 00-.17.161l-.253 3.08.254 2.98a.17.17 0 00.169.162c.089 0 .161-.07.17-.162l.287-2.98-.289-3.08a.17.17 0 00-.168-.162zM14.065 26.15c.14 0 .254-.113.26-.258l.215-2.947-.215-6.177a.263.263 0 00-.26-.259.262.262 0 00-.26.259l-.19 6.177.19 2.948a.262.262 0 00.26.258zM18.76 26.151c.187 0 .342-.16.346-.355v.003-.003l.146-2.86-.146-7.129a.355.355 0 00-.346-.354.354.354 0 00-.346.354l-.13 7.126.13 2.866a.353.353 0 00.346.352zM16.38 26.15a.31.31 0 00.31-.305v.002l.185-2.902-.184-6.217a.311.311 0 00-.62 0l-.165 6.217.164 2.9a.31.31 0 00.31.306zM10.65 26.107c.101 0 .182-.08.19-.185l.267-2.992-.267-2.846a.192.192 0 00-.19-.185.192.192 0 00-.19.186l-.233 2.845.235 2.992a.19.19 0 00.188.185zM8.426 25.93c.072 0 .132-.056.14-.136l.296-2.868-.296-2.977c-.01-.08-.068-.138-.141-.138-.074 0-.133.058-.14.138l-.26 2.977.26 2.867c.008.08.067.138.14.138zM17.571 16.597a.33.33 0 00-.329.332l-.146 6.004.146 2.888a.33.33 0 00.33.33c.179 0 .323-.145.328-.332v.002l.164-2.888-.164-6.005a.331.331 0 00-.329-.33zM12.922 26.15a.245.245 0 00.24-.234l.235-2.982-.235-5.705a.244.244 0 00-.24-.235.243.243 0 00-.24.235l-.21 5.705.21 2.983a.242.242 0 00.24.234zM15.526 25.87l.204-2.925-.204-6.373a.29.29 0 00-.29-.283.29.29 0 00-.292.283l-.182 6.373.182 2.926c.004.157.132.28.291.28a.29.29 0 00.291-.282v.002zM30.551 19.267a3.44 3.44 0 00-1.334.268A6.081 6.081 0 0023.156 14c-.779 0-1.537.153-2.207.41-.26.101-.33.204-.332.406v10.923c.002.21.166.386.373.406l9.561.006a3.446 3.446 0 003.45-3.442c0-1.9-1.545-3.442-3.45-3.442zM19.929 14.793c-.21 0-.383.17-.386.378l-.158 7.749.158 2.812a.384.384 0 00.386.375c.21 0 .382-.169.385-.378v.003l.171-2.812-.171-7.75a.386.386 0 00-.385-.377z" fill="#fff")
       - if(dato.config.spotify_url != "")
         li.stay-tuned__network-item
           a.stay-tuned__network-link(href=dato.config.spotify_url title="Notre podcast sur Spotify")
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40")
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true")
               circle(cx="20" cy="20" r="20" fill="#fff")
               path(d="M19.988 0C8.955 0 0 8.955 0 19.988c0 11.057 8.955 19.988 19.988 19.988 11.057 0 19.988-8.955 19.988-19.988C40 8.955 31.045 0 19.988 0zm9.17 28.848c-.358.597-1.122.764-1.72.406-4.704-2.866-10.602-3.51-17.575-1.935-.669.144-1.338-.262-1.48-.93-.144-.67.262-1.338.93-1.482 7.618-1.743 14.162-1.003 19.415 2.221.621.359.812 1.123.43 1.72zm2.46-5.445c-.454.74-1.409.955-2.15.525-5.372-3.319-13.563-4.274-19.916-2.34-.836.239-1.695-.215-1.934-1.027-.239-.836.215-1.695 1.05-1.934 7.26-2.197 16.287-1.146 22.472 2.65.693.43.932 1.386.478 2.126zm.215-5.684c-6.448-3.82-17.075-4.179-23.236-2.316-.98.31-2.03-.263-2.34-1.242-.31-.979.262-2.03 1.242-2.34 7.068-2.15 18.817-1.72 26.22 2.675a1.865 1.865 0 01.645 2.555c-.501.907-1.648 1.194-2.531.668z" fill="#1ED760")
       - if(dato.config.itunes_url != "")
         li.stay-tuned__network-item
-          a.stay-tuned__network-link(href=dato.config.itunes_url title="Notre podcast sur Apple Podcasts")
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40")
+          a.stay-tuned__network-link(href=dato.config.itunes_url title="Notre podcast sur Apple Podcasts" )
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true")
               circle(cx="20" cy="20" r="20" fill="#93C")
               path(d="M19.147 32.857c-1.022-.345-1.241-.814-1.66-3.562-.487-3.195-.593-5.172-.312-5.799.375-.83 1.39-1.301 2.812-1.307 1.41-.005 2.434.47 2.811 1.307.283.626.177 2.604-.31 5.799-.331 2.232-.514 2.796-.97 3.175-.628.525-1.519.67-2.363.388h-.008zm-4.364-3.277c-3.527-1.64-5.787-4.413-6.609-8.102-.205-.952-.24-3.224-.046-4.098.514-2.345 1.496-4.179 3.128-5.8C13.607 9.238 16.632 8 19.999 8c3.333 0 6.347 1.215 8.64 3.487 1.747 1.714 2.729 3.529 3.231 5.92.171.795.171 2.965.011 3.86-.524 2.829-2.191 5.406-4.622 7.137-.868.62-2.99 1.7-3.333 1.7-.126 0-.137-.123-.08-.62.103-.798.205-.964.685-1.154.765-.302 2.066-1.178 2.865-1.934 1.38-1.294 2.397-2.987 2.865-4.766.297-1.11.262-3.58-.069-4.723-1.038-3.633-4.177-6.458-8.024-7.213-1.119-.216-3.15-.216-4.28 0-3.893.755-7.111 3.72-8.093 7.45-.263 1.014-.263 3.483 0 4.497.65 2.469 2.34 4.733 4.554 6.08.434.27.959.55 1.176.637.48.194.582.356.673 1.154.057.485.046.625-.08.625-.08 0-.662-.237-1.278-.518l-.057-.04zm.046-4.387c-1.187-.895-2.238-2.482-2.671-4.039-.263-.94-.263-2.728.011-3.666.72-2.531 2.694-4.494 5.433-5.416.936-.312 3.014-.382 4.166-.142 3.973.836 6.792 4.593 6.244 8.32-.217 1.503-.765 2.736-1.735 3.882-.48.58-1.643 1.55-1.849 1.55-.034 0-.069-.366-.069-.812v-.815l.594-.669c2.237-2.531 2.078-6.068-.365-8.388-.948-.904-2.043-1.434-3.459-1.68-.913-.159-1.107-.159-2.066-.01-1.455.224-2.583.757-3.584 1.693-2.454 2.296-2.614 5.851-.376 8.385l.589.669v.82c0 .452-.038.819-.085.819-.046 0-.377-.216-.73-.486l-.048-.015zm3.96-4.402c-1.016-.446-1.563-1.288-1.575-2.386 0-.987.582-1.847 1.587-2.35.639-.318 1.769-.318 2.408.002.697.341 1.267 1.004 1.484 1.697.662 2.126-1.724 3.989-3.88 3.037h-.024z" fill="#fff")
       - if(dato.config.google_podcasts_url != "")
         li.stay-tuned__network-item
-          a.stay-tuned__network-link(href=dato.config.google_podcasts_url title="Notre podcast sur Google Podcasts")
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40")
+          a.stay-tuned__network-link(href=dato.config.google_podcasts_url title="Notre podcast sur Google Podcasts" )
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true")
               circle(cx="20" cy="20" r="20" fill="#F4F4F4")
               path(d="M29 19.182v1.636a1.5 1.5 0 003 0v-1.636a1.5 1.5 0 00-3 0z" fill="#0066D9")
               path(d="M11 19.224v-.042a1.5 1.5 0 10-3 .043v1.636a1.5 1.5 0 003 0v-1.637z" fill="#4285F4")
@@ -58,7 +58,7 @@
       - if(dato.config.rss_url != "")
         li.stay-tuned__network-item
           a.stay-tuned__network-link(href=dato.config.rss_url title="Notre flux RSS")
-            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40")
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"  aria-hidden="true")
               circle(cx="20" cy="20" r="20" fill="#F26500")
               path(d="M26 29c0-8.777-7.223-16-16-16V9c10.97 0 20 9.03 20 20h-4zm-13.258-5.488a2.75 2.75 0 012.745 2.746A2.752 2.752 0 0112.736 29 2.74 2.74 0 0110 26.258a2.748 2.748 0 012.742-2.745zM23.258 29H19.37c0-5.14-4.23-9.37-9.37-9.37v-3.888c7.273 0 13.258 5.986 13.258 13.258z" fill="#fff")
 

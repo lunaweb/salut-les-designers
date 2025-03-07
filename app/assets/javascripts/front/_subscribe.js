@@ -43,6 +43,13 @@
     Subscribe.prototype.init = function () {
       var _ = this;
 
+      if (window.matchMedia('(max-width: 47.99em)').matches) {
+        _.elements.$toggler.attr('aria-expanded', 'false');
+        _.elements.$form.attr('aria-hidden', 'true');
+      } else {
+
+      }
+
       _.elements.$toggler.on('click', _.boundedFuncs.toggleOnSmall);
 
       _.elements.$emailInput.on('input', function () {
@@ -50,6 +57,7 @@
           _.elements.$submit.attr('disabled', false);
         } else {
           _.elements.$submit.attr('disabled', true);
+          // todo: message d'error
         }
       });
 
@@ -103,8 +111,10 @@
       var _ = this;
 
       _.elements.$toggler.addClass('is-open');
+      _.elements.$toggler.attr('aria-expanded', 'true');
       _.elements.$text.addClass('is-open');
       _.elements.$form.addClass('is-open');
+      _.elements.$form.attr('aria-hidden', 'false');
 
       _.isOpenOnSmall = true;
     }
@@ -113,8 +123,10 @@
       var _ = this;
 
       _.elements.$toggler.removeClass('is-open');
+      _.elements.$toggler.attr('aria-expanded', 'false');
       _.elements.$text.removeClass('is-open');
       _.elements.$form.removeClass('is-open');
+      _.elements.$form.attr('aria-hidden', 'true');
 
       _.isOpenOnSmall = false;
     }

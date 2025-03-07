@@ -10,17 +10,18 @@ section.c-starwars.js-starwars
   .c-starwars__inner
     .container.c-starwars__perspective
       .c-starwars__list
-        .c-starwars__group
+        ul.c-starwars__group
           - dato.audios.each do |audio|
-            .c-starwars__item
+            li.c-starwars__item
               a.c-starwars__link (href="/episodes/#{audio.permalink}.html")
-                img.c-starwars__portrait (src=audio.portrait.url(w: 120, h: 120) alt=audio.title srcset="#{audio.portrait.url(w: 220, h: 220)} 2x")
+                img.c-starwars__portrait (src=audio.portrait.url(w: 120, h: 120) alt="" srcset="#{audio.portrait.url(w: 220, h: 220)} 2x")
 
-                  / - if audio.number.present?
-                  /   .c-starwars__number
-                  /     |Interview #{audio.number} N°
-
-                .c-starwars__name
-                  span
-                    = audio.title
-                .c-starwars__job = audio.subtitle
+                  - if audio.number.present?
+                    .c-starwars__number
+                      - text = audio.subtitle == "Capsule design" ? audio.subtitle : "Interview"
+                      |#{text} N°#{audio.number}
+                hgroup
+                  h2.c-starwars__name
+                    span
+                      = audio.title
+                  p.c-starwars__job = audio.subtitle =="Capsule design" ? "" : audio.subtitle
