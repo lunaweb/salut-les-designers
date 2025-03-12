@@ -1,6 +1,9 @@
 ---
 layout: front
+theme: dark
 ---
+
+- body_class "u-theme-dark"
 
 = content_for(:seo) do
   = dato_meta_tags(seo)
@@ -11,7 +14,7 @@ section.c-edito.js-single
 
     .c-edito__head
       h1.u-visually-hidden = title
-      .c-edito__title.js-single-title(data-fit-to=".c-edito__head") 
+      .c-edito__title.js-single-title(data-fit-to=".c-edito__head")
         span = title
 
     .c-edito__body = content.html_safe
