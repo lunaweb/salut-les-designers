@@ -7,7 +7,6 @@
   transition: color 0.25s;
 
   &:hover, &:focus {
-    color: $color-red;
     text-decoration: none;
   }
 }
