@@ -40,6 +40,10 @@ body {
   font-size: em($base-font-size, $rem-baseline);
   line-height: $base-line-height / $base-font-size;
   text-size-adjust: none;
+
+  &.u-theme-dark {
+    background-color: $color-red;
+  }
 }
 
 a {

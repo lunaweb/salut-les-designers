@@ -53,19 +53,21 @@
       font-weight: $font-bold;
       transform: rotate(-15deg);
       color: $color-salmon;
-      background-color: #A82618;
+      background-color: $color-red;
       border: solid rem(2px) #fff;
       border-radius: rem(10px);
       display: inline-block;
       line-height: (14 / 20);
       transform: rotate(-2deg);
       padding: 0.4em 0.4em;
+
+      span {
+        font-weight: $font-regular;
+      }
+
       @include mq($from: large) {
         border: solid rem(3px) #fff;
         font-size: rem(40px);
-      }
-      span {
-        font-weight: $font-regular;
       }
     }
 
